@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diana's Sparkle Jewellery - Luxury Handcrafted Pieces</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#d4af37',
+                        secondary: '#8b4513',
+                        accent: '#c0c0c0'
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <img src="logo.png" alt="Diana's Sparkle Jewellery" class="h-12 w-auto">
+                </div>
+<div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors">Home</a>
+                    <a href="#collection" class="text-gray-700 hover:text-primary transition-colors">Collection</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary transition-colors">About</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary transition-colors">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://www.instagram.com/diana_1_jewellery" target="_blank" class="text-gray-700 hover:text-primary">
+                        <i data-feather="instagram"></i>
+                    </a>
+                    <button class="md:hidden">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section id="home" class="pt-20 bg-gradient-to-b from-white to-gray-50 min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-4 py-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="mb-6">
+                        <img src="logo.png" alt="Diana's Sparkle Jewellery" class="h-20 w-auto">
+                    </div>
+                    <p class="text-xl text-gray-600 mb-8 font-playfair">Handcrafted jewellery that tells your unique story. Each piece is meticulously created with passion and precision.</p>
+                    <div class="flex space-x-4">
+                        <a href="#collection" class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all">Explore Collection</a>
+                        <a href="#contact" class="border-2 border-primary text-primary px-8 py-3 rounded-full font-semibold hover:bg-primary hover:text-white transition-all">Custom Order</a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-primary to-secondary rounded-2xl p-8 shadow-2xl">
+                        <img src="front.png" alt="Featured Jewellery" class="w-full h-96 object-cover rounded-lg shadow-lg">
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 bg-accent p-4 rounded-lg shadow-lg">
+                        <img src="image6.png" alt="Secondary Piece" class="w-24 h-24 object-cover rounded">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Collection Section -->
+    <section id="collection" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-cinzel font-bold text-gray-800 mb-4">Our Collection</h2>
+                <p class="text-xl text-gray-600 font-playfair">Discover our exquisite range of handcrafted jewellery pieces</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="group relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
+                    <div class="h-80 overflow-hidden">
+                        <img src="image6.png" alt="Necklace Collection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-cinzel font-semibold text-gray-800 mb-2">Elegant Necklaces</h3>
+                        <p class="text-gray-600 mb-4">Handcrafted necklaces that complement your elegance</p>
+                        <span class="text-primary font-bold text-lg">From $120</span>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="group relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
+                    <div class="h-80 overflow-hidden">
+                        <img src="image4.png" alt="Bracelet Collection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-cinzel font-semibold text-gray-800 mb-2">Charming Bracelets</h3>
+                        <p class="text-gray-600 mb-4">Delicate bracelets for every occasion</p>
+                        <span class="text-primary font-bold text-lg">From $80</span>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="group relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
+                    <div class="h-80 overflow-hidden">
+                        <img src="image3.png" alt="Earrings Collection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-cinzel font-semibold text-gray-800 mb-2">Sparkling Earrings</h3>
+                        <p class="text-gray-600 mb-4">Earrings that catch the light and attention</p>
+                        <span class="text-primary font-bold text-lg">From $60</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all">
+                    View Full Collection
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="store.png" alt="Artisan Workshop" class="w-full rounded-2xl shadow-lg">
+                </div>
+                <div>
+                    <h2 class="text-4xl font-cinzel font-bold text-gray-800 mb-6">Our Story</h2>
+                    <p class="text-lg text-gray-600 mb-6 font-playfair">
+                        Diana's Sparkle Jewellery began with a passion for creating beautiful, handcrafted pieces that tell a story. 
+                        Each item is meticulously crafted with attention to detail and love for the art.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 font-playfair">
+                        We believe that jewellery should not only adorn but also inspire and connect people through its beauty and craftsmanship.
+                    </p>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary mb-2">500+</div>
+                            <div class="text-gray-600">Pieces Created</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary mb-2">3+</div>
+                            <div class="text-gray-600">Years Experience</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary mb-2">100%</div>
+                            <div class="text-gray-600">Handcrafted</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-cinzel font-bold text-gray-800 mb-4">Get In Touch</h2>
+                <p class="text-xl text-gray-600 font-playfair">We'd love to hear from you and create something special together</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <form class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Message</label>
+                        <textarea rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="text-center">
+                    <div class="bg-primary bg-opacity-10 p-4 rounded-full inline-block mb-4">
+                        <i data-feather="mail" class="text-primary w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Email</h3>
+                    <p class="text-gray-600">najigold@yahoo.com</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-primary bg-opacity-10 p-4 rounded-full inline-block mb-4">
+                        <i data-feather="phone" class="text-primary w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Phone</h3>
+                    <p class="text-gray-600">02 8102 7994</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-primary bg-opacity-10 p-4 rounded-full inline-block mb-4">
+                        <i data-feather="instagram" class="text-primary w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Instagram</h3>
+                    <p class="text-gray-600">@diana_1_jewellery</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <img src="logo.png" alt="Diana's Sparkle Jewellery" class="h-12 w-auto mb-4">
+                    <p class="text-gray-400">Creating beautiful memories through handcrafted jewellery.</p>
+                </div>
+<div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#collection" class="text-gray-400 hover:text-white transition-colors">Collection</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/diana_1_jewellery" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-feather="instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Newsletter</h4>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 bg-gray-800 text-white rounded-l-lg">
+                        <button class="bg-primary px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition-all">
+                            <i data-feather="send"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Diana's Sparkle Jewellery. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize Feather Icons
+        feather.replace();
+    </script>
+</body>
+</html>
