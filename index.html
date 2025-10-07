@@ -6,501 +6,1559 @@
   <title>Diana's Sparkle Jewellery — Handcrafted Luxury</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    :root{
+    :root {
       --bg: #fffdfb;
       --muted: #6b7280;
       --accent: #d4af37; /* gold */
       --accent-2: #b88722;
       --deep: #0f1724;
       --card: #ffffff;
-      --glass: rgba(255,255,255,0.6);
-      --radius: 14px;
-      --max-width: 1200px;
-      --transition: 240ms cubic-bezier(.2,.9,.3,1);
-      --shadow-1: 0 6px 20px rgba(16,24,40,0.06);
-      --shadow-2: 0 18px 50px rgba(16,24,40,0.08);
+      --glass: rgba(255,255,255,0.8);
+      --radius: 16px;
+      --max-width: 1400px;
+      --transition: 300ms cubic-bezier(.2,.9,.3,1);
+      --shadow-1: 0 8px 25px rgba(16,24,40,0.08);
+      --shadow-2: 0 20px 60px rgba(16,24,40,0.12);
+      --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4e5ab 100%);
+      --gradient-bg: linear-gradient(135deg, #fffdfb 0%, #f8f6f0 100%);
     }
 
     * { box-sizing: border-box; }
-    html,body { height:100%; }
-    body{
-      margin:0;
-      font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      color:var(--deep);
-      background:
-        radial-gradient(1200px 600px at -10% -20%, rgba(212,175,55,0.04), transparent 12%),
-        linear-gradient(180deg,#fffdfb 0%, #fbfbfb 100%);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      -webkit-text-size-adjust:100%;
-      -webkit-tap-highlight-color: transparent;
+
+    html { 
+      scroll-behavior: smooth; 
+      scroll-padding-top: 80px;
     }
 
-    a{color:inherit;text-decoration:none}
-    img{display:block;max-width:100%;height:auto}
-
-    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
-
-    /* Skip link */
-    .skip-link{
-      position:absolute;left:12px;top:12px;background:#111827;color:#fff;padding:8px 12px;border-radius:8px;z-index:999;border:0;
-      transform:translateY(-120%);transition:transform 200ms ease;box-shadow:var(--shadow-1)
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      color: var(--deep);
+      background: var(--gradient-bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    .skip-link:focus{transform:translateY(0)}
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .animate-fade-up {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .animate-slide-in {
+      animation: slideIn 0.5s ease-out;
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Utilities */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
     /* Header */
-    header{
-      position:sticky;top:0;z-index:60;
-      background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.7));
-      backdrop-filter: blur(6px);
-      border-bottom:1px solid rgba(16,24,40,0.04);
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(212,175,55,0.1);
+      transition: all var(--transition);
     }
-    .nav-wrap{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0;
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      gap: 16px;
     }
-    .brand{
-      display:flex;align-items:center;gap:12px;min-width:0;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Playfair Display", serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--deep);
+      text-decoration: none;
+      min-width: 0;
     }
-    .brand img{height:52px;width:auto;border-radius:10px;object-fit:cover;flex-shrink:0}
-    .brand h1{font-family:"Playfair Display",serif;font-size:18px;margin:0;color:var(--deep);letter-spacing:0.2px}
-    .brand .tag{font-size:12px;color:var(--muted);margin-top:2px}
 
-    /* Desktop nav */
-    nav.primary{display:flex;align-items:center;gap:18px}
-    nav.primary a{padding:8px 12px;border-radius:10px;font-weight:600;color:var(--muted);transition:all var(--transition)}
-    nav.primary a:hover{color:var(--accent-2);background:rgba(212,175,55,0.06)}
-    nav.primary a.active{color:var(--deep);box-shadow:inset 0 -3px 0 var(--accent);background:linear-gradient(180deg,rgba(212,175,55,0.03),transparent)}
-
-    /* CTAs in header */
-    .header-cta{display:flex;gap:10px;align-items:center}
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;
-      transition:transform var(--transition), box-shadow var(--transition), background var(--transition);
-      border:0;
+    .brand img {
+      height: 44px;
+      width: 44px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
     }
-    .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 30px rgba(212,175,55,0.15)}
-    .btn-primary:hover{transform:translateY(-3px);background:var(--accent-2)}
-    .btn-outline{background:transparent;border:1px solid rgba(16,24,40,0.06);color:var(--deep)}
 
-    /* Mobile menu */
-    .mobile{display:none}
-    .hamburger{
-      width:44px;height:44px;border-radius:10px;border:1px solid rgba(16,24,40,0.04);display:inline-grid;place-items:center;background:#fff;cursor:pointer
+    .brand-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .hamburger svg{width:20px;height:20px;color:var(--deep);}
 
-    /* Hero */
-    .hero{
-      padding:44px 0 28px;
-      display:grid;
-      grid-template-columns:1fr;gap:22px;
-      align-items:center;
+    /* Navigation - Desktop */
+    nav.desktop {
+      display: flex;
+      align-items: center;
+      gap: 24px;
     }
-    .eyebrow{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:6px 12px;border-radius:999px;font-weight:800;font-size:12px}
-    .hero h2{font-family:"Playfair Display",serif;font-size:34px;margin:8px 0 12px;line-height:1.02}
-    .lead{color:var(--muted);font-size:16px;max-width:60ch}
 
-    .hero-grid{display:grid;grid-template-columns:1fr;gap:22px;align-items:center}
-    .hero-card{
-      border-radius:14px;overflow:hidden;background:linear-gradient(135deg, rgba(212,175,55,0.06), rgba(139,69,19,0.02));
-      padding:12px;box-shadow:var(--shadow-2)
+    nav.desktop a {
+      color: var(--muted);
+      font-weight: 500;
+      padding: 10px 16px;
+      border-radius: 25px;
+      transition: all var(--transition);
+      position: relative;
+      white-space: nowrap;
     }
-    .hero-card img{height:360px;object-fit:cover;width:100%;border-radius:10px}
 
-    .mini-gallery{display:flex;gap:10px;margin-top:10px}
-    .mini-gallery img{height:86px;width:100%;border-radius:8px;object-fit:cover;box-shadow:var(--shadow-1)}
-
-    /* Collection */
-    .section{padding:36px 0}
-    .section-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .grid-cards{display:grid;grid-template-columns:repeat(1,1fr);gap:16px;margin-top:18px}
-    .card{
-      background:var(--card);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;
-      transition:transform var(--transition), box-shadow var(--transition);box-shadow:var(--shadow-1)
+    nav.desktop a:hover {
+      color: var(--accent);
+      background: rgba(212,175,55,0.1);
+      transform: translateY(-1px);
     }
-    .card:hover{transform:translateY(-8px);box-shadow:var(--shadow-2)}
-    .card-media{height:260px;overflow:hidden}
-    .card-media img{width:100%;height:100%;object-fit:cover;transition:transform var(--transition)}
-    .card:hover .card-media img{transform:scale(1.05)}
-    .card-body{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
-    .card-title{font-family:"Playfair Display",serif;font-size:18px;margin:0}
-    .card-desc{color:var(--muted);font-size:14px;margin:0}
-    .card-actions{display:flex;align-items:center;gap:10px;margin-top:8px}
-    .badge{font-size:12px;padding:6px 10px;border-radius:999px;background:linear-gradient(180deg, rgba(139,69,19,0.04), transparent);color:var(--accent-2);font-weight:700}
 
-    /* About + stats */
-    .about-grid{display:grid;grid-template-columns:1fr;gap:16px;align-items:center}
-    .about-media img{border-radius:10px;box-shadow:var(--shadow-1)}
-    .stats{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
-    .stat{flex:1;min-width:88px;background:linear-gradient(180deg, rgba(212,175,55,0.04),transparent);padding:10px;border-radius:10px;text-align:center}
-    .stat .num{font-size:18px;font-weight:800;color:var(--accent-2)}
-    .stat .label{font-size:13px;color:var(--muted)}
-
-    /* Contact */
-    .contact-card{background:linear-gradient(180deg,#fff,#fbfbfb);padding:16px;border-radius:12px;box-shadow:var(--shadow-1)}
-    .form-grid{display:grid;grid-template-columns:1fr;gap:12px}
-    .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-    input,textarea,select{
-      width:100%;padding:10px;border-radius:10px;border:1px solid rgba(16,24,40,0.06);font-size:15px;background:#fff
+    nav.desktop a.active {
+      color: white;
+      background: var(--gradient-gold);
+      box-shadow: var(--shadow-1);
     }
-    input:focus,textarea:focus,select:focus{box-shadow:0 10px 30px rgba(212,175,55,0.08);border-color:var(--accent)}
 
-    .contact-tiles{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
-    .tile{display:flex;gap:12px;padding:12px;border-radius:12px;border:1px solid rgba(16,24,40,0.04);background:#fff}
+    /* Mobile Navigation */
+    .mobile-nav {
+      display: none;
+    }
+
+    .hamburger {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid rgba(212,175,55,0.2);
+      background: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+
+    .hamburger:hover {
+      background: rgba(212,175,55,0.1);
+      border-color: var(--accent);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      background: white;
+      box-shadow: var(--shadow-2);
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: all var(--transition);
+      z-index: 99;
+      border-top: 1px solid rgba(212,175,55,0.1);
+    }
+
+    .mobile-menu.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mobile-menu nav {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mobile-menu nav a {
+      color: var(--deep);
+      font-weight: 500;
+      padding: 12px 16px;
+      border-radius: 12px;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mobile-menu nav a:hover {
+      background: rgba(212,175,55,0.1);
+      color: var(--accent);
+    }
+
+    .mobile-menu nav a.active {
+      background: var(--gradient-gold);
+      color: white;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: none;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--gradient-gold);
+      color: white;
+      box-shadow: var(--shadow-1);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    /* Header CTA */
+    .header-cta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 100px 0 60px;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(212,175,55,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(212,175,55,0.08) 0%, transparent 50%),
+        var(--gradient-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23d4af37" opacity="0.1"/></svg>');
+      opacity: 0.5;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(212,175,55,0.15);
+      color: var(--accent-2);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 20px 0;
+      color: var(--deep);
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Hero Image */
+    .hero-image {
+      position: relative;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: var(--shadow-2);
+      transition: transform var(--transition);
+    }
+
+    .hero-image:hover img {
+      transform: scale(1.02);
+    }
+
+    .floating-elements {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .floating-badge {
+      background: white;
+      padding: 8px 12px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-1);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Section Styling */
+    .section {
+      padding: 60px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      color: var(--deep);
+    }
+
+    .section-subtitle {
+      font-size: clamp(1rem, 2vw, 1.1rem);
+      color: var(--muted);
+      margin: 0 0 24px 0;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* Carousel Styles */
+    .carousel-container {
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .carousel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 16px;
+    }
+
+    .carousel-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 700;
+      color: var(--deep);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .carousel-nav {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .carousel-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+      font-size: 14px;
+    }
+
+    .carousel-btn:hover {
+      background: var(--accent);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .carousel-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+      gap: 16px;
+    }
+
+    .carousel-item {
+      min-width: calc(50% - 8px);
+      flex-shrink: 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-1);
+      transition: all var(--transition);
+    }
+
+    .carousel-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-2);
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .carousel-content {
+      padding: 20px;
+    }
+
+    .carousel-content h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.2rem;
+      margin: 0 0 8px 0;
+      color: var(--deep);
+      line-height: 1.3;
+    }
+
+    .carousel-content p {
+      color: var(--muted);
+      margin: 0 0 12px 0;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(212,175,55,0.15);
+      color: var(--accent-2);
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    /* About Section */
+    .about {
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-text {
+      animation: slideIn 0.6s ease-out;
+    }
+
+    .about img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: var(--shadow-2);
+    }
+
+    /* Contact Section */
+    .contact {
+      background: var(--gradient-bg);
+    }
+
+    .contact-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-form {
+      background: white;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-1);
+      margin-bottom: 32px;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-grid input,
+    .form-grid textarea {
+      padding: 12px 16px;
+      border: 2px solid rgba(212,175,55,0.2);
+      border-radius: 12px;
+      font-size: 16px;
+      transition: all var(--transition);
+      font-family: inherit;
+    }
+
+    .form-grid input:focus,
+    .form-grid textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
+    }
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-1);
+      transition: transform var(--transition);
+      text-align: center;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      color: white;
+      font-size: 20px;
+    }
+
+    .contact-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+      color: var(--deep);
+    }
+
+    .contact-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-card strong {
+      color: var(--accent-2);
+      font-weight: 600;
+    }
 
     /* Footer */
-    footer{padding:28px 0;margin-top:28px;background:#0f1724;color:#cbd5e1}
-    .small{font-size:13px;color:rgba(255,255,255,0.75)}
-
-    /* Responsive: adjustments to fix proportions on small screens */
-    @media(min-width:720px){
-      .hero-grid{grid-template-columns:1fr 1fr}
-      .grid-cards{grid-template-columns:repeat(3,1fr)}
-      .about-grid{grid-template-columns:1fr 1fr}
-      .contact-tiles{grid-template-columns:repeat(3,1fr)}
-      .mobile{display:none}
-      .primary{display:flex}
-      .hamburger{display:none}
-      .card-media{height:320px}
-      .hero-card img{height:420px}
+    footer {
+      background: var(--deep);
+      color: white;
+      padding: 32px 0;
+      text-align: center;
     }
 
-    @media(max-width:719px){
-      /* Hide desktop nav CTAs to prevent overflow — use hamburger only */
-      nav.primary{display:none}
-      .header-cta .btn-outline,
-      .header-cta .btn-primary{display:none}
-
-      /* show mobile area with hamburger */
-      .mobile{display:flex}
-      .hamburger{display:inline-grid}
-
-      /* Make nav-wrap use more compact spacing */
-      .nav-wrap{padding:8px 0}
-
-      /* Reduce logo size */
-      .brand img{height:44px}
-      .brand h1{font-size:16px}
-      .brand .tag{font-size:11px}
-
-      /* Hero adjustments */
-      .hero{padding:22px 0 20px}
-      .hero h2{font-size:26px;margin:8px 0}
-      .hero-card img{height:240px}
-      .mini-gallery{overflow:auto; -webkit-overflow-scrolling:touch; gap:8px}
-      .mini-gallery img{height:80px;flex:0 0 120px}
-
-      /* Cards and grids */
-      .card-media{height:200px}
-      .card-body{padding:12px}
-      .card-title{font-size:17px}
-
-      /* Make contact form single column on small screens */
-      .two-col{grid-template-columns:1fr}
-      .contact-tiles{grid-template-columns:1fr}
-
-      /* Footer stacking */
-      footer .container{flex-direction:column;align-items:flex-start;gap:12px}
+    footer p {
+      margin: 0;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem;
     }
 
-    /* small accessibility focus outlines */
-    a:focus, button:focus, input:focus, textarea:focus {outline:3px solid rgba(212,175,55,0.16);outline-offset:3px}
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(212,175,55,0.2);
+      z-index: 101;
+    }
+
+    .scroll-progress {
+      height: 100%;
+      background: var(--gradient-gold);
+      width: 0;
+      transition: width 0.1s ease;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .nav-wrap {
+        padding: 10px 0;
+      }
+
+      .brand {
+        font-size: 18px;
+        gap: 10px;
+      }
+
+      .brand img {
+        height: 40px;
+        width: 40px;
+      }
+
+      nav.desktop {
+        display: none;
+      }
+
+      .mobile-nav {
+        display: block;
+      }
+
+      .header-cta {
+        gap: 6px;
+      }
+
+      .header-cta .btn {
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+
+      .hero {
+        padding: 80px 0 40px;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+      }
+
+      .hero-text {
+        order: 2;
+      }
+
+      .hero-image {
+        order: 1;
+      }
+
+      .hero-cta {
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .hero-cta .btn {
+        flex: 1;
+        justify-content: center;
+        min-width: 140px;
+      }
+
+      .floating-elements {
+        top: 10px;
+        right: 10px;
+        gap: 6px;
+      }
+
+      .floating-badge {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+      }
+
+      .about-text {
+        order: 2;
+      }
+
+      .carousel-item {
+        min-width: calc(100% - 0px);
+      }
+
+      .carousel-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .carousel-nav {
+        align-self: flex-end;
+      }
+
+      .carousel-title {
+        font-size: 1.3rem;
+        gap: 8px;
+      }
+
+      .carousel-content {
+        padding: 16px;
+      }
+
+      .carousel-content h3 {
+        font-size: 1.1rem;
+      }
+
+      .carousel-content p {
+        font-size: 0.9rem;
+      }
+
+      .section {
+        padding: 40px 0;
+      }
+
+      .section-header {
+        margin-bottom: 30px;
+      }
+
+      .carousel-container {
+        margin-bottom: 40px;
+      }
+
+      .contact-form {
+        padding: 24px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .contact-info {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .contact-card {
+        padding: 20px;
+      }
+
+      .mobile-menu {
+        top: 70px;
+      }
+    }
+
+    /* Extra small screens */
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 12px;
+      }
+
+      .hero {
+        padding: 70px 0 30px;
+      }
+
+      .section {
+        padding: 30px 0;
+      }
+
+      .carousel-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+      }
+
+      .carousel-item img {
+        height: 180px;
+      }
+
+      .contact-form {
+        padding: 20px;
+      }
+
+      .btn {
+        padding: 10px 16px;
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-progress" id="scrollProgress"></div>
+  </div>
 
   <!-- Header -->
   <header>
-    <div class="container nav-wrap" role="navigation" aria-label="Top navigation">
-      <div class="brand" aria-hidden="false">
-        <img src="logo.png" alt="Diana's Sparkle logo" onerror="this.src='placeholder-logo.png'">
-        <div>
-          <h1>Diana's Sparkle</h1>
-          <div class="tag">Handcrafted fine jewellery</div>
-        </div>
-      </div>
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="#home" class="brand">
+          <img src="logo.png" alt="Diana's Sparkle logo" onerror="this.src='placeholder-logo.png'">
+          <span class="brand-text">Diana's Sparkle</span>
+        </a>
 
-      <!-- Desktop primary nav -->
-      <nav class="primary" aria-label="Primary">
-        <a href="#home" class="active">Home</a>
-        <a href="#collection">Collection</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+        <!-- Desktop Navigation -->
+        <nav class="desktop">
+          <a href="#home" class="active">Home</a>
+          <a href="#collection">Collection</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
 
-      <div class="header-cta" role="group" aria-label="Header actions">
-        <!-- these are hidden on mobile to prevent overflow (CSS) -->
-        <a class="btn btn-outline" href="#collection" title="View collection">View Collection</a>
-        <a class="btn btn-primary" href="#contact" title="Contact for bespoke">Enquire</a>
-
-        <!-- Mobile hamburger -->
-        <div class="mobile" aria-hidden="false">
-          <button id="menu-btn" class="hamburger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav">
+          <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+            <i class="fas fa-bars" id="hamburgerIcon"></i>
           </button>
+        </div>
+
+        <div class="header-cta">
+          <a class="btn btn-outline" href="tel:+0281027994">
+            <i class="fas fa-phone"></i>
+            <span class="cta-text">Call</span>
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Mobile menu (hidden by default) -->
-    <div id="mobile-menu" style="display:none;background:linear-gradient(180deg,rgba(255,255,255,0.98),#fff);border-top:1px solid rgba(16,24,40,0.04);box-shadow:var(--shadow-1);">
-      <div class="container" style="padding:10px 12px;display:flex;flex-direction:column;gap:8px">
-        <a href="#home" class="mobile-link" style="padding:10px;border-radius:10px">Home</a>
-        <a href="#collection" class="mobile-link" style="padding:10px;border-radius:10px">Collection</a>
-        <a href="#about" class="mobile-link" style="padding:10px;border-radius:10px">About</a>
-        <a href="#contact" class="mobile-link" style="padding:10px;border-radius:10px">Contact</a>
-        <a href="https://www.instagram.com/diana_1_jewellery" target="_blank" rel="noopener" style="padding:10px;border-radius:10px">Instagram</a>
-        <!-- quick CTA in mobile nav -->
-        <div style="display:flex;gap:8px;margin-top:6px">
-          <a class="btn btn-outline" href="#collection" style="flex:1;text-align:center">View Collection</a>
-          <a class="btn btn-primary" href="#contact" style="flex:1;text-align:center">Enquire</a>
-        </div>
-      </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <nav>
+        <a href="#home" onclick="closeMobileMenu()">
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+        <a href="#collection" onclick="closeMobileMenu()">
+          <i class="fas fa-gem"></i>
+          Collection
+        </a>
+        <a href="#about" onclick="closeMobileMenu()">
+          <i class="fas fa-heart"></i>
+          About
+        </a>
+        <a href="#contact" onclick="closeMobileMenu()">
+          <i class="fas fa-envelope"></i>
+          Contact
+        </a>
+      </nav>
     </div>
   </header>
 
-  <!-- Main -->
-  <main id="main" tabindex="-1">
-    <!-- Hero -->
-    <section id="home" class="hero container" aria-labelledby="hero-heading">
-      <div class="hero-grid">
-        <div>
-          <span class="eyebrow" aria-hidden="true">Artisan Made</span>
-          <h2 id="hero-heading">Jewellery that speaks softly — and lasts a lifetime</h2>
-          <p class="lead">Each piece at Diana's Sparkle is hand-designed and handcrafted with careful attention to detail. We prioritize timeless shapes, quality materials and a gentle, feminine aesthetic.</p>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <span class="eyebrow">
+            <i class="fas fa-star"></i>
+            Artisan Made
+          </span>
+          <h1>Jewellery that speaks softly — and lasts a lifetime</h1>
+          <p>Each piece at Diana's Sparkle is hand-designed and handcrafted with careful attention to detail. We prioritize timeless shapes, quality materials and a gentle, feminine aesthetic.</p>
 
-          <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap">
-            <a class="btn btn-primary" href="#collection">Explore Collection</a>
-            <a class="btn btn-outline" href="#contact">Custom Order</a>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#collection">
+              <i class="fas fa-gem"></i>
+              Explore Collection
+            </a>
+            <a class="btn btn-outline" href="#contact">
+              <i class="fas fa-palette"></i>
+              Custom Order
+            </a>
           </div>
 
-          <div style="margin-top:12px;color:var(--muted);font-size:14px">Prefer a direct chat? <strong style="color:var(--accent-2)">Call or message us</strong> and we'll guide you through bespoke options.</div>
-        </div>
-
-        <div>
-          <div class="hero-card" aria-hidden="false">
-            <img src="front.png" alt="Featured jewellery piece — Diana's Sparkle" onerror="this.src='placeholder-hero.png'">
-            <div class="mini-gallery" role="list" aria-label="Gallery">
-              <img src="image6.png" alt="Necklace closeup" onerror="this.src='placeholder-1.png'">
-              <img src="image3.png" alt="Earrings closeup" onerror="this.src='placeholder-2.png'">
-              <img src="image4.png" alt="Bracelet closeup" onerror="this.src='placeholder-3.png'">
-            </div>
+          <div style="margin-top: 16px; color: var(--muted); font-size: 14px;">
+            Prefer a direct chat? <strong style="color: var(--accent-2);">Call or message us</strong> and we'll guide you through bespoke options.
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Collection -->
-    <section id="collection" class="section container" aria-labelledby="collection-heading">
-      <div class="section-header">
-        <div>
-          <h3 id="collection-heading" style="margin:0;font-family:'Playfair Display',serif;font-size:22px">Our Collection</h3>
-          <p class="lead" style="margin-top:8px">An elegant selection of necklaces, bracelets and earrings — all handcrafted. We price by enquiry so we can tailor metal, stones and fit to you.</p>
-        </div>
-        <div style="display:flex;gap:10px">
-          <a class="btn btn-outline" href="#contact">Request Quote</a>
-        </div>
-      </div>
-
-      <div class="grid-cards" role="list" aria-label="Collection items">
-        <!-- Card 1 -->
-        <article class="card" role="listitem" aria-labelledby="card1-title">
-          <div class="card-media"><img src="v2.png" alt="Elegant necklaces collection" onerror="this.src='placeholder-1.png'"></div>
-          <div class="card-body">
-            <h4 id="card1-title" class="card-title">Elegant Necklaces</h4>
-            <p class="card-desc">Necklaces crafted to flatter — minimalist designs to heirloom pieces. Custom lengths & finishes available.</p>
-            <div class="card-actions">
-              <span class="badge">Handcrafted</span>
-              <a class="btn btn-outline" href="#contact" style="margin-left:auto">Enquire</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="card" role="listitem" aria-labelledby="card2-title">
-          <div class="card-media"><img src="v1.png" alt="Bracelet collection" onerror="this.src='placeholder-3.png'"></div>
-          <div class="card-body">
-            <h4 id="card2-title" class="card-title">Charming Bracelets</h4>
-            <p class="card-desc">Delicate bracelets with thoughtful details. Options for engraving and adjustable sizing.</p>
-            <div class="card-actions">
-              <span class="badge">Made to Order</span>
-              <a class="btn btn-outline" href="#contact" style="margin-left:auto">Enquire</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="card" role="listitem" aria-labelledby="card3-title">
-          <div class="card-media"><img src="v3.png" alt="Sparkling earrings" onerror="this.src='placeholder-4.png'"></div>
-          <div class="card-body">
-            <h4 id="card3-title" class="card-title">Sparkling Earrings</h4>
-            <p class="card-desc">Designs that catch the light — studs to drops. Custom finishes and precious-metal options available.</p>
-            <div class="card-actions">
-              <span class="badge">Custom Finish</span>
-              <a class="btn btn-outline" href="#contact" style="margin-left:auto">Enquire</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="section container" aria-labelledby="about-heading">
-      <div class="about-grid">
-        <div class="about-media">
-          <img src="store.png" alt="Artisan workshop" onerror="this.src='placeholder-store.png'">
-        </div>
-        <div>
-          <h3 id="about-heading" style="font-family:'Playfair Display',serif;font-size:22px;margin:0">Our Story</h3>
-          <p class="lead" style="margin-top:10px">Diana's Sparkle began in a small workshop with a love for creating meaningful jewellery. Each piece is thoughtfully designed for comfort and longevity.</p>
-
-          <div class="stats" role="list">
-            <div class="stat" role="listitem">
-              <div class="num">500+</div>
-              <div class="label">Pieces Created</div>
-            </div>
-            <div class="stat" role="listitem">
-              <div class="num">3+</div>
-              <div class="label">Years Experience</div>
-            </div>
-            <div class="stat" role="listitem">
-              <div class="num">100%</div>
-              <div class="label">Handcrafted</div>
+        <div class="hero-image">
+          <img src="front.png" alt="Featured jewellery piece" onerror="this.src='placeholder-hero.png'" class="animate-float">
+          <div class="floating-elements">
+            <div class="floating-badge">
+              <i class="fas fa-award"></i>
+              Handcrafted
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Contact -->
-    <section id="contact" class="section container" aria-labelledby="contact-heading">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-        <div>
-          <h3 id="contact-heading" style="font-family:'Playfair Display',serif;font-size:22px;margin:0">Get in touch</h3>
-          <p class="lead" style="margin-top:8px">Tell us about your idea — custom pieces, repairs, or bespoke designs. We'll respond with guidance and a tailored quote.</p>
+  <!-- Collection Section with 3 Carousels -->
+  <section id="collection" class="section">
+    <div class="container">
+      <div class="section-header animate-fade-up">
+        <h2 class="section-title">Our Exquisite Collection</h2>
+        <p class="section-subtitle">An elegant selection of necklaces, bracelets and earrings — all handcrafted. We price by enquiry so we can tailor metal, stones and fit to you.</p>
+      </div>
+
+      <!-- Necklaces Carousel -->
+      <div class="carousel-container">
+        <div class="carousel-header">
+          <h3 class="carousel-title">
+            <i class="fas fa-circle-notch" style="color: var(--accent);"></i>
+            Elegant Necklaces
+          </h3>
+          <div class="carousel-nav">
+            <button class="carousel-btn" onclick="prevSlide('necklaces')" id="necklaces-prev">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn" onclick="nextSlide('necklaces')" id="necklaces-next">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
-        <div style="display:flex;gap:12px">
-          <a class="btn btn-outline" href="mailto:najigold@yahoo.com">Email Us</a>
-          <a class="btn btn-primary" href="tel:+0281027994">Call</a>
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="necklaces-track">
+            <div class="carousel-item">
+              <img src="v1.png" alt="Classic Gold Necklace" onerror="this.src='placeholder-1.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-crown"></i>
+                  Premium Gold
+                </span>
+                <h3>Classic Gold Chain</h3>
+                <p>Timeless 18k gold chain perfect for everyday elegance. Available in multiple lengths and finishes.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v2.png" alt="Pearl Pendant Necklace" onerror="this.src='placeholder-2.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-gem"></i>
+                  Freshwater Pearl
+                </span>
+                <h3>Pearl Pendant</h3>
+                <p>Elegant freshwater pearl pendant on delicate gold chain. A statement piece for special occasions.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v3.png" alt="Diamond Tennis Necklace" onerror="this.src='placeholder-3.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-star"></i>
+                  Diamond
+                </span>
+                <h3>Diamond Tennis</h3>
+                <p>Stunning diamond tennis necklace with perfectly matched stones. Luxury redefined in every detail.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div style="margin-top:14px;display:grid;grid-template-columns:1fr;gap:12px">
-        <div class="contact-card">
-          <!-- Static HTML form; wire to backend -->
+      <!-- Bracelets Carousel -->
+      <div class="carousel-container">
+        <div class="carousel-header">
+          <h3 class="carousel-title">
+            <i class="fas fa-circle" style="color: var(--accent);"></i>
+            Charming Bracelets
+          </h3>
+          <div class="carousel-nav">
+            <button class="carousel-btn" onclick="prevSlide('bracelets')" id="bracelets-prev">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn" onclick="nextSlide('bracelets')" id="bracelets-next">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="bracelets-track">
+            <div class="carousel-item">
+              <img src="v4.png" alt="Gold Chain Bracelet" onerror="this.src='placeholder-4.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-link"></i>
+                  Chain Link
+                </span>
+                <h3>Gold Chain Bracelet</h3>
+                <p>Delicate gold chain bracelet with adjustable sizing. Perfect for layering or wearing alone.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v5.png" alt="Charm Bracelet" onerror="this.src='placeholder-5.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-heart"></i>
+                  Customizable
+                </span>
+                <h3>Charm Collection</h3>
+                <p>Build your story with our customizable charm bracelet. Add meaningful charms over time.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v6.png" alt="Tennis Bracelet" onerror="this.src='placeholder-6.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-star"></i>
+                  Diamond
+                </span>
+                <h3>Tennis Bracelet</h3>
+                <p>Classic diamond tennis bracelet with secure clasp. Timeless elegance for any occasion.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earrings Carousel -->
+      <div class="carousel-container">
+        <div class="carousel-header">
+          <h3 class="carousel-title">
+            <i class="fas fa-dot-circle" style="color: var(--accent);"></i>
+            Sparkling Earrings
+          </h3>
+          <div class="carousel-nav">
+            <button class="carousel-btn" onclick="prevSlide('earrings')" id="earrings-prev">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn" onclick="nextSlide('earrings')" id="earrings-next">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="earrings-track">
+            <div class="carousel-item">
+              <img src="v7.png" alt="Diamond Studs" onerror="this.src='placeholder-7.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-gem"></i>
+                  Diamond Studs
+                </span>
+                <h3>Classic Diamond Studs</h3>
+                <p>Perfect diamond studs in various carat weights. Secure backing and brilliant cut diamonds.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v8.png" alt="Drop Earrings" onerror="this.src='placeholder-8.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-tint"></i>
+                  Drop Style
+                </span>
+                <h3>Elegant Drops</h3>
+                <p>Graceful drop earrings that catch and reflect light beautifully. Available in gold and silver.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v9.png" alt="Hoop Earrings" onerror="this.src='placeholder-9.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-circle-notch"></i>
+                  Hoops
+                </span>
+                <h3>Gold Hoops</h3>
+                <p>Classic gold hoops in multiple sizes. From subtle everyday wear to statement pieces.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section about">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text">
+          <span class="eyebrow">
+            <i class="fas fa-heart"></i>
+            Our Story
+          </span>
+          <h2 class="section-title" style="text-align: left; margin-bottom: 20px;">
+            Crafting Beauty Since Day One
+          </h2>
+          <p style="font-size: 1.1rem; color: var(--muted); margin-bottom: 20px;">
+            Diana's Sparkle began in a small workshop with a love for creating meaningful jewellery. Each piece is thoughtfully designed for comfort and longevity, using only the finest materials and traditional craftsmanship techniques.
+          </p>
+          <p style="color: var(--muted); margin-bottom: 24px;">
+            We believe that jewellery should tell a story - your story. That's why every piece we create is made to order, allowing us to incorporate your personal style, preferred metals, and meaningful details that make each piece uniquely yours.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a class="btn btn-primary" href="#collection">
+              <i class="fas fa-eye"></i>
+              View Collection
+            </a>
+            <a class="btn btn-outline" href="#contact">
+              <i class="fas fa-comments"></i>
+              Start Conversation
+            </a>
+          </div>
+        </div>
+        <div class="about-image">
+          <img src="store.png" alt="Diana's Sparkle workshop" onerror="this.src='placeholder-store.png'" class="animate-float">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <div class="contact-content">
+        <div class="section-header">
+          <h2 class="section-title">Get in touch</h2>
+          <p class="section-subtitle">
+            Tell us about your idea — custom pieces, repairs, or bespoke designs. We'll respond with guidance and a tailored quote.
+          </p>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
           <form action="#" method="post" class="form-grid" aria-label="Contact form">
-            <div class="two-col">
+            <div class="form-row">
               <input name="name" type="text" placeholder="Your name" required aria-label="Your name">
               <input name="email" type="email" placeholder="Email address" required aria-label="Email address">
             </div>
             <input name="subject" type="text" placeholder="Subject (optional)" aria-label="Subject">
             <textarea name="message" rows="6" placeholder="Tell us about the piece you'd like..." required aria-label="Message"></textarea>
-            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-              <button type="submit" class="btn btn-primary">Send Message</button>
-              <div style="color:var(--muted);font-size:14px">Or contact: <strong style="color:var(--accent-2);margin-left:6px">najigold@yahoo.com</strong></div>
+            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: space-between;">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i>
+                Send Message
+              </button>
+              <div style="color: var(--muted); font-size: 14px;">
+                Or contact: <strong style="color: var(--accent-2);">najigold@yahoo.com</strong>
+              </div>
             </div>
           </form>
         </div>
 
-        <div class="contact-tiles">
-          <div class="tile">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0"><path d="M3 8.5l9 6 9-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div>
-              <div style="font-weight:700">Email</div>
-              <div style="color:var(--muted)">najigold@yahoo.com</div>
+        <!-- Contact Information Cards -->
+        <div class="contact-info">
+          <div class="contact-card animate-fade-up">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
             </div>
+            <h3>Email</h3>
+            <p>Get in touch for custom orders</p>
+            <strong>najigold@yahoo.com</strong>
           </div>
 
-          <div class="tile">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.84 19.84 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.84 19.84 0 0 1-3.07-8.63A2 2 0 0 1 4.09 2h3a2 2 0 0 1 2 1.72c.12 1.21.39 2.42.81 3.58a2 2 0 0 1-.45 2.11L8.91 11.09a16 16 0 0 0 6 6l1.68-1.68a2 2 0 0 1 2.11-.45c1.16.42 2.37.69 3.58.81A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div>
-              <div style="font-weight:700">Phone</div>
-              <div style="color:var(--muted)">02 8102 7994</div>
+          <div class="contact-card animate-fade-up" style="animation-delay: 0.1s;">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
             </div>
+            <h3>Phone</h3>
+            <p>Speak with our artisan team</p>
+            <strong>02 8102 7994</strong>
           </div>
 
-          <div class="tile">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex-shrink:0"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.2"/></svg>
-            <div>
-              <div style="font-weight:700">Instagram</div>
-              <div style="color:var(--muted)">@diana_1_jewellery</div>
+          <div class="contact-card animate-fade-up" style="animation-delay: 0.2s;">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
             </div>
+            <h3>Address</h3>
+            <p>Visit our workshop by appointment</p>
+            <strong>56 Spencer St, Fairfield NSW 2165</strong>
+          </div>
+
+          <div class="contact-card animate-fade-up" style="animation-delay: 0.3s;">
+            <div class="contact-icon">
+              <i class="fab fa-instagram"></i>
+            </div>
+            <h3>Instagram</h3>
+            <p>Follow our latest creations</p>
+            <strong>@diana_1_jewellery</strong>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
-    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-      <div style="display:flex;gap:12px;align-items:center">
-        <img src="logo.png" alt="Diana's Sparkle Logo" style="height:44px;border-radius:8px" onerror="this.src='placeholder-logo.png'">
-        <div>
-          <div style="font-weight:700">Diana's Sparkle Jewellery</div>
-          <div class="small">Creating beautiful memories through handcrafted jewellery.</div>
-        </div>
-      </div>
-
-      <div style="display:flex;gap:12px;align-items:center">
-        <a class="small" href="#collection">Collection</a>
-        <a class="small" href="#about">About</a>
-        <a class="small" href="#contact">Contact</a>
-      </div>
-
-      <div class="small">© <span id="year"></span> Diana's Sparkle. All rights reserved.</div>
+    <div class="container">
+      <p>&copy; 2025 Diana's Sparkle Jewellery. All rights reserved. | Handcrafted with love in Australia</p>
     </div>
   </footer>
 
-  <!-- Tiny, deliberate JS: header mobile toggle + focus management + year -->
+  <!-- JavaScript for Interactions -->
   <script>
-    // Set year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Mobile menu functionality
+    let mobileMenuOpen = false;
 
-    // Mobile menu toggle with accessible attributes
-    (function(){
-      const btn = document.getElementById('menu-btn');
-      const menu = document.getElementById('mobile-menu');
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburgerIcon = document.getElementById('hamburgerIcon');
 
-      if (!btn || !menu) return;
+      mobileMenuOpen = !mobileMenuOpen;
 
-      btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!expanded));
-        if (expanded) {
-          menu.style.display = 'none';
-          btn.setAttribute('aria-label', 'Open menu');
+      if (mobileMenuOpen) {
+        mobileMenu.classList.add('active');
+        hamburgerIcon.classList.remove('fa-bars');
+        hamburgerIcon.classList.add('fa-times');
+      } else {
+        mobileMenu.classList.remove('active');
+        hamburgerIcon.classList.remove('fa-times');
+        hamburgerIcon.classList.add('fa-bars');
+      }
+    }
+
+    function closeMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburgerIcon = document.getElementById('hamburgerIcon');
+
+      mobileMenuOpen = false;
+      mobileMenu.classList.remove('active');
+      hamburgerIcon.classList.remove('fa-times');
+      hamburgerIcon.classList.add('fa-bars');
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const hamburger = document.querySelector('.hamburger');
+
+      if (mobileMenuOpen && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Scroll progress indicator
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.body.offsetHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Active navigation highlighting
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('nav a');
+
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.pageYOffset >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Carousel functionality with 3 images per carousel (9 total)
+    const carousels = {
+      'necklaces': { currentIndex: 0, itemsToShow: 2, totalItems: 3 },
+      'bracelets': { currentIndex: 0, itemsToShow: 2, totalItems: 3 },
+      'earrings': { currentIndex: 0, itemsToShow: 2, totalItems: 3 }
+    };
+
+    function updateCarousel(type) {
+      const track = document.getElementById(type + '-track');
+      const items = track.querySelectorAll('.carousel-item');
+      const itemWidth = items[0].offsetWidth + 16; // width + gap
+      const translateX = -carousels[type].currentIndex * itemWidth;
+      track.style.transform = `translateX(${translateX}px)`;
+
+      // Update button states
+      updateCarouselButtons(type);
+    }
+
+    function updateCarouselButtons(type) {
+      const prevBtn = document.getElementById(type + '-prev');
+      const nextBtn = document.getElementById(type + '-next');
+      const carousel = carousels[type];
+      const maxIndex = carousel.totalItems - carousel.itemsToShow;
+
+      // Disable/enable previous button
+      prevBtn.disabled = carousel.currentIndex === 0;
+
+      // Disable/enable next button  
+      nextBtn.disabled = carousel.currentIndex >= maxIndex;
+    }
+
+    function nextSlide(type) {
+      const carousel = carousels[type];
+      const maxIndex = carousel.totalItems - carousel.itemsToShow;
+
+      if (carousel.currentIndex < maxIndex) {
+        carousel.currentIndex++;
+        updateCarousel(type);
+      }
+    }
+
+    function prevSlide(type) {
+      const carousel = carousels[type];
+
+      if (carousel.currentIndex > 0) {
+        carousel.currentIndex--;
+        updateCarousel(type);
+      }
+    }
+
+    // Responsive carousel adjustment
+    function adjustCarousels() {
+      const width = window.innerWidth;
+      Object.keys(carousels).forEach(type => {
+        if (width < 768) {
+          carousels[type].itemsToShow = 1;
         } else {
-          menu.style.display = 'block';
-          btn.setAttribute('aria-label', 'Close menu');
-          // move focus to first link in menu for keyboard users
-          const first = menu.querySelector('a');
-          if (first) first.focus();
+          carousels[type].itemsToShow = 2;
+        }
+
+        // Reset position if current index is invalid
+        const maxIndex = carousels[type].totalItems - carousels[type].itemsToShow;
+        if (carousels[type].currentIndex > maxIndex) {
+          carousels[type].currentIndex = Math.max(0, maxIndex);
+        }
+
+        updateCarousel(type);
+      });
+    }
+
+    // Auto-play carousels (optional)
+    function autoPlayCarousels() {
+      Object.keys(carousels).forEach(type => {
+        const carousel = carousels[type];
+        const maxIndex = carousel.totalItems - carousel.itemsToShow;
+
+        if (carousel.currentIndex < maxIndex) {
+          nextSlide(type);
+        } else {
+          carousel.currentIndex = 0;
+          updateCarousel(type);
         }
       });
+    }
 
-      // Close menu if a link is clicked
-      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        menu.style.display = 'none';
-        btn.setAttribute('aria-expanded', 'false');
-        btn.setAttribute('aria-label', 'Open menu');
-      }));
+    // Initialize carousels on load
+    window.addEventListener('load', () => {
+      adjustCarousels();
+      // Start auto-play every 6 seconds
+      setInterval(autoPlayCarousels, 6000);
+    });
 
-      // Close if user presses Escape
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && menu.style.display === 'block') {
-          menu.style.display = 'none';
-          btn.setAttribute('aria-expanded', 'false');
-          btn.setAttribute('aria-label', 'Open menu');
-          btn.focus();
+    // Adjust on resize
+    window.addEventListener('resize', adjustCarousels);
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
         }
       });
-    })();
+    }, observerOptions);
+
+    // Observe all animatable elements
+    document.querySelectorAll('.animate-fade-up, .animate-slide-in').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      observer.observe(el);
+    });
+
+    // Header background on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.style.background = 'rgba(255,255,255,0.95)';
+        header.style.backdropFilter = 'blur(20px)';
+      } else {
+        header.style.background = 'rgba(255,255,255,0.8)';
+        header.style.backdropFilter = 'blur(20px)';
+      }
+    });
+
+    // Form submission handling
+    document.querySelector('.form-grid').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get form data
+      const formData = new FormData(this);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const subject = formData.get('subject');
+      const message = formData.get('message');
+
+      // Create mailto link
+      const mailtoSubject = subject ? subject : 'Enquiry from ' + name;
+      const mailtoBody = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+      const mailtoLink = `mailto:najigold@yahoo.com?subject=${encodeURIComponent(mailtoSubject)}&body=${mailtoBody}`;
+
+      // Open mail client
+      window.location.href = mailtoLink;
+
+      // Show success message
+      alert('Thank you for your enquiry! Your default email client should now open with your message.');
+    });
   </script>
 </body>
 </html>
