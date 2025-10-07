@@ -411,14 +411,28 @@
     .section-subtitle {
       font-size: clamp(1rem, 2vw, 1.1rem);
       color: var(--muted);
-      margin: 0 0 24px 0;
+      margin: 0 0 16px 0;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
       line-height: 1.6;
     }
 
-    /* Carousel Styles */
+    .collection-note {
+      font-size: 0.95rem;
+      color: var(--accent-2);
+      font-style: italic;
+      margin: 0 0 24px 0;
+      background: rgba(212,175,55,0.08);
+      padding: 12px 20px;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Carousel Styles - LARGER IMAGES */
     .carousel-container {
       margin-bottom: 50px;
       position: relative;
@@ -485,11 +499,11 @@
     .carousel-track {
       display: flex;
       transition: transform 0.5s ease;
-      gap: 16px;
+      gap: 20px;
     }
 
     .carousel-item {
-      min-width: calc(50% - 8px);
+      min-width: calc(50% - 10px);
       flex-shrink: 0;
       background: white;
       border-radius: 12px;
@@ -503,40 +517,41 @@
       box-shadow: var(--shadow-2);
     }
 
+    /* LARGER IMAGE CONTAINER */
     .carousel-item img {
       width: 100%;
-      height: 200px;
+      height: 300px; /* Increased from 200px */
       object-fit: cover;
     }
 
     .carousel-content {
-      padding: 20px;
+      padding: 24px; /* Increased padding */
     }
 
     .carousel-content h3 {
       font-family: "Playfair Display", serif;
-      font-size: 1.2rem;
-      margin: 0 0 8px 0;
+      font-size: 1.3rem; /* Slightly larger */
+      margin: 0 0 10px 0;
       color: var(--deep);
       line-height: 1.3;
     }
 
     .carousel-content p {
       color: var(--muted);
-      margin: 0 0 12px 0;
+      margin: 0 0 16px 0;
       line-height: 1.5;
-      font-size: 0.95rem;
+      font-size: 1rem;
     }
 
     .badge {
       display: inline-block;
       background: rgba(212,175,55,0.15);
       color: var(--accent-2);
-      padding: 4px 10px;
+      padding: 6px 12px;
       border-radius: 16px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     /* About Section */
@@ -794,6 +809,10 @@
         min-width: calc(100% - 0px);
       }
 
+      .carousel-item img {
+        height: 250px; /* Slightly smaller on mobile but still larger than before */
+      }
+
       .carousel-header {
         flex-direction: column;
         align-items: flex-start;
@@ -810,15 +829,15 @@
       }
 
       .carousel-content {
-        padding: 16px;
+        padding: 20px;
       }
 
       .carousel-content h3 {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
       }
 
       .carousel-content p {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
       }
 
       .section {
@@ -877,7 +896,7 @@
       }
 
       .carousel-item img {
-        height: 180px;
+        height: 220px;
       }
 
       .contact-form {
@@ -1000,149 +1019,19 @@
     <div class="container">
       <div class="section-header animate-fade-up">
         <h2 class="section-title">Our Exquisite Collection</h2>
-        <p class="section-subtitle">An elegant selection of necklaces, bracelets and earrings — all handcrafted. We price by enquiry so we can tailor metal, stones and fit to you.</p>
-      </div>
-
-      <!-- Necklaces Carousel -->
-      <div class="carousel-container">
-        <div class="carousel-header">
-          <h3 class="carousel-title">
-            <i class="fas fa-circle-notch" style="color: var(--accent);"></i>
-            Elegant Necklaces
-          </h3>
-          <div class="carousel-nav">
-            <button class="carousel-btn" onclick="prevSlide('necklaces')" id="necklaces-prev">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="carousel-btn" onclick="nextSlide('necklaces')" id="necklaces-next">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
-        <div class="carousel-wrapper">
-          <div class="carousel-track" id="necklaces-track">
-            <div class="carousel-item">
-              <img src="v1.png" alt="Classic Gold Necklace" onerror="this.src='placeholder-1.png'">
-              <div class="carousel-content">
-                <span class="badge">
-                  <i class="fas fa-crown"></i>
-                  Premium Gold
-                </span>
-                <h3>Classic Gold Chain</h3>
-                <p>Timeless 18k gold chain perfect for everyday elegance. Available in multiple lengths and finishes.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="v2.png" alt="Pearl Pendant Necklace" onerror="this.src='placeholder-2.png'">
-              <div class="carousel-content">
-                <span class="badge">
-                  <i class="fas fa-gem"></i>
-                  Freshwater Pearl
-                </span>
-                <h3>Pearl Pendant</h3>
-                <p>Elegant freshwater pearl pendant on delicate gold chain. A statement piece for special occasions.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="v3.png" alt="Diamond Tennis Necklace" onerror="this.src='placeholder-3.png'">
-              <div class="carousel-content">
-                <span class="badge">
-                  <i class="fas fa-star"></i>
-                  Diamond
-                </span>
-                <h3>Diamond Tennis</h3>
-                <p>Stunning diamond tennis necklace with perfectly matched stones. Luxury redefined in every detail.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-          </div>
+        <p class="section-subtitle">An elegant selection of gold necklaces, bracelets, bangles and earrings — all handcrafted. We price by enquiry so we can tailor metal, stones and fit to you.</p>
+        <div class="collection-note">
+          <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+          The pieces shown below are examples of what we have in store and the quality of craftsmanship you can expect.
         </div>
       </div>
 
-      <!-- Bracelets Carousel -->
+      <!-- Earrings & Rings Carousel -->
       <div class="carousel-container">
         <div class="carousel-header">
           <h3 class="carousel-title">
-            <i class="fas fa-circle" style="color: var(--accent);"></i>
-            Charming Bracelets
-          </h3>
-          <div class="carousel-nav">
-            <button class="carousel-btn" onclick="prevSlide('bracelets')" id="bracelets-prev">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="carousel-btn" onclick="nextSlide('bracelets')" id="bracelets-next">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
-        <div class="carousel-wrapper">
-          <div class="carousel-track" id="bracelets-track">
-            <div class="carousel-item">
-              <img src="v4.png" alt="Gold Chain Bracelet" onerror="this.src='placeholder-4.png'">
-              <div class="carousel-content">
-                <span class="badge">
-                  <i class="fas fa-link"></i>
-                  Chain Link
-                </span>
-                <h3>Gold Chain Bracelet</h3>
-                <p>Delicate gold chain bracelet with adjustable sizing. Perfect for layering or wearing alone.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="v5.png" alt="Charm Bracelet" onerror="this.src='placeholder-5.png'">
-              <div class="carousel-content">
-                <span class="badge">
-                  <i class="fas fa-heart"></i>
-                  Customizable
-                </span>
-                <h3>Charm Collection</h3>
-                <p>Build your story with our customizable charm bracelet. Add meaningful charms over time.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="v6.png" alt="Tennis Bracelet" onerror="this.src='placeholder-6.png'">
-              <div class="carousel-content">
-                <span class="badge">
-                  <i class="fas fa-star"></i>
-                  Diamond
-                </span>
-                <h3>Tennis Bracelet</h3>
-                <p>Classic diamond tennis bracelet with secure clasp. Timeless elegance for any occasion.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Earrings Carousel -->
-      <div class="carousel-container">
-        <div class="carousel-header">
-          <h3 class="carousel-title">
-            <i class="fas fa-dot-circle" style="color: var(--accent);"></i>
-            Sparkling Earrings
+            <i class="fas fa-gem" style="color: var(--accent);"></i>
+            Earrings & Rings
           </h3>
           <div class="carousel-nav">
             <button class="carousel-btn" onclick="prevSlide('earrings')" id="earrings-prev">
@@ -1156,44 +1045,178 @@
         <div class="carousel-wrapper">
           <div class="carousel-track" id="earrings-track">
             <div class="carousel-item">
-              <img src="v7.png" alt="Diamond Studs" onerror="this.src='placeholder-7.png'">
-              <div class="carousel-content">
-                <span class="badge">
-                  <i class="fas fa-gem"></i>
-                  Diamond Studs
-                </span>
-                <h3>Classic Diamond Studs</h3>
-                <p>Perfect diamond studs in various carat weights. Secure backing and brilliant cut diamonds.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="v8.png" alt="Drop Earrings" onerror="this.src='placeholder-8.png'">
-              <div class="carousel-content">
-                <span class="badge">
-                  <i class="fas fa-tint"></i>
-                  Drop Style
-                </span>
-                <h3>Elegant Drops</h3>
-                <p>Graceful drop earrings that catch and reflect light beautifully. Available in gold and silver.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="v9.png" alt="Hoop Earrings" onerror="this.src='placeholder-9.png'">
+              <img src="v1.png" alt="Earring Hoop Design" onerror="this.src='placeholder-1.png'">
               <div class="carousel-content">
                 <span class="badge">
                   <i class="fas fa-circle-notch"></i>
-                  Hoops
+                  Hoop Style
                 </span>
-                <h3>Gold Hoops</h3>
-                <p>Classic gold hoops in multiple sizes. From subtle everyday wear to statement pieces.</p>
+                <h3>Earring Hoops</h3>
+                <p>Classic hoop earrings in various sizes, perfect for everyday wear or special occasions. Available in different gold finishes.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v2.png" alt="21K Twisted Bracelet" onerror="this.src='placeholder-2.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-crown"></i>
+                  21K Gold
+                </span>
+                <h3>Twisted Bracelet</h3>
+                <p>Elegant 21k gold twisted bracelet showcasing intricate craftsmanship and premium quality materials.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v3.png" alt="Double Band Engagement Ring" onerror="this.src='placeholder-3.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-heart"></i>
+                  Engagement
+                </span>
+                <h3>Double Band Ring</h3>
+                <p>Stunning double band engagement ring design, perfect for marking life's most precious moments.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Necklaces & Pendants Carousel -->
+      <div class="carousel-container">
+        <div class="carousel-header">
+          <h3 class="carousel-title">
+            <i class="fas fa-circle-notch" style="color: var(--accent);"></i>
+            Necklaces & Pendants
+          </h3>
+          <div class="carousel-nav">
+            <button class="carousel-btn" onclick="prevSlide('necklaces')" id="necklaces-prev">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn" onclick="nextSlide('necklaces')" id="necklaces-next">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="necklaces-track">
+            <div class="carousel-item">
+              <img src="v4.png" alt="18K Gold Love Knot Pendant Necklace" onerror="this.src='placeholder-4.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-heart"></i>
+                  18K Gold
+                </span>
+                <h3>Love Knot Pendant</h3>
+                <p>Beautiful 18k gold love knot pendant necklace, symbolizing eternal love and connection with elegant craftsmanship.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v5.png" alt="Twisted Bangle Design" onerror="this.src='placeholder-5.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-circle"></i>
+                  Twisted Design
+                </span>
+                <h3>Twisted Bangle</h3>
+                <p>Sophisticated twisted bangle featuring intricate goldwork and a comfortable fit for daily wear.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v6.png" alt="Coin Bracelet Design" onerror="this.src='placeholder-6.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-coins"></i>
+                  Coin Style
+                </span>
+                <h3>Coin Bracelet</h3>
+                <p>Unique coin bracelet design combining traditional elements with contemporary styling for a timeless look.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Men's & Chain Collection Carousel -->
+      <div class="carousel-container">
+        <div class="carousel-header">
+          <h3 class="carousel-title">
+            <i class="fas fa-link" style="color: var(--accent);"></i>
+            Men's & Chain Collection
+          </h3>
+          <div class="carousel-nav">
+            <button class="carousel-btn" onclick="prevSlide('bracelets')" id="bracelets-prev">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn" onclick="nextSlide('bracelets')" id="bracelets-next">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="bracelets-track">
+            <div class="carousel-item">
+              <img src="v7.png" alt="Nail Bracelet Design" onerror="this.src='placeholder-7.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-shield-alt"></i>
+                  Bold Design
+                </span>
+                <h3>Nail Bracelet</h3>
+                <p>Contemporary nail bracelet design featuring bold styling and premium construction for a distinctive look.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v8.png" alt="Chain for Men" onerror="this.src='placeholder-8.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-male"></i>
+                  Men's Collection
+                </span>
+                <h3>Men's Chain</h3>
+                <p>Sophisticated chain designed specifically for men, combining strength and elegance in premium gold construction.</p>
+                <a class="btn btn-outline" href="#contact">
+                  <i class="fas fa-envelope"></i>
+                  Enquire
+                </a>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="v9.png" alt="Premium Necklace Design" onerror="this.src='placeholder-9.png'">
+              <div class="carousel-content">
+                <span class="badge">
+                  <i class="fas fa-star"></i>
+                  Premium
+                </span>
+                <h3>Premium Necklace</h3>
+                <p>Exquisite necklace showcasing the finest craftsmanship and materials, perfect for special occasions and gifting.</p>
                 <a class="btn btn-outline" href="#contact">
                   <i class="fas fa-envelope"></i>
                   Enquire
@@ -1410,15 +1433,15 @@
 
     // Carousel functionality with 3 images per carousel (9 total)
     const carousels = {
+      'earrings': { currentIndex: 0, itemsToShow: 2, totalItems: 3 },
       'necklaces': { currentIndex: 0, itemsToShow: 2, totalItems: 3 },
-      'bracelets': { currentIndex: 0, itemsToShow: 2, totalItems: 3 },
-      'earrings': { currentIndex: 0, itemsToShow: 2, totalItems: 3 }
+      'bracelets': { currentIndex: 0, itemsToShow: 2, totalItems: 3 }
     };
 
     function updateCarousel(type) {
       const track = document.getElementById(type + '-track');
       const items = track.querySelectorAll('.carousel-item');
-      const itemWidth = items[0].offsetWidth + 16; // width + gap
+      const itemWidth = items[0].offsetWidth + 20; // width + gap
       const translateX = -carousels[type].currentIndex * itemWidth;
       track.style.transform = `translateX(${translateX}px)`;
 
