@@ -29,12 +29,12 @@
     }
 
     * { box-sizing: border-box; }
-
+    
     html { 
       scroll-behavior: smooth; 
       scroll-padding-top: 80px;
     }
-
+    
     body {
       margin: 0;
       font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
@@ -226,6 +226,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
     }
 
     .mobile-menu nav a:hover {
@@ -432,7 +433,7 @@
       margin-right: auto;
     }
 
-    /* Carousel Styles - LARGER IMAGES */
+    /* Carousel Styles - FIXED IMAGE DISPLAY */
     .carousel-container {
       margin-bottom: 50px;
       position: relative;
@@ -517,11 +518,14 @@
       box-shadow: var(--shadow-2);
     }
 
-    /* LARGER IMAGE CONTAINER */
+    /* FIXED - Complete image display without cropping */
     .carousel-item img {
       width: 100%;
-      height: 300px; /* Increased from 200px */
-      object-fit: cover;
+      height: 350px; /* Large height to showcase jewelry properly */
+      object-fit: contain; /* Shows complete image without cropping */
+      background: #f9f9f9; /* Light background for empty space */
+      border-radius: 12px 12px 0 0;
+      padding: 15px; /* Padding around the image */
     }
 
     .carousel-content {
@@ -727,7 +731,7 @@
       .nav-wrap {
         padding: 10px 0;
       }
-
+      
       .brand {
         font-size: 18px;
         gap: 10px;
@@ -754,11 +758,11 @@
         padding: 10px 14px;
         font-size: 14px;
       }
-
+      
       .hero {
         padding: 80px 0 40px;
       }
-
+      
       .hero-content {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -772,7 +776,7 @@
       .hero-image {
         order: 1;
       }
-
+      
       .hero-cta {
         justify-content: center;
         gap: 10px;
@@ -794,7 +798,7 @@
         padding: 6px 10px;
         font-size: 11px;
       }
-
+      
       .about-content {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -804,13 +808,14 @@
       .about-text {
         order: 2;
       }
-
+      
       .carousel-item {
         min-width: calc(100% - 0px);
       }
 
       .carousel-item img {
-        height: 250px; /* Slightly smaller on mobile but still larger than before */
+        height: 280px; /* Smaller on mobile but still shows full image */
+        padding: 12px; /* Reduced padding on mobile */
       }
 
       .carousel-header {
@@ -839,7 +844,7 @@
       .carousel-content p {
         font-size: 0.95rem;
       }
-
+      
       .section {
         padding: 40px 0;
       }
@@ -896,7 +901,8 @@
       }
 
       .carousel-item img {
-        height: 220px;
+        height: 250px;
+        padding: 10px;
       }
 
       .contact-form {
@@ -925,7 +931,7 @@
           <img src="logo.png" alt="Diana's Sparkle logo" onerror="this.src='placeholder-logo.png'">
           <span class="brand-text">Diana's Sparkle</span>
         </a>
-
+        
         <!-- Desktop Navigation -->
         <nav class="desktop">
           <a href="#home" class="active">Home</a>
@@ -940,7 +946,7 @@
             <i class="fas fa-bars" id="hamburgerIcon"></i>
           </button>
         </div>
-
+        
         <div class="header-cta">
           <a class="btn btn-outline" href="tel:+0281027994">
             <i class="fas fa-phone"></i>
@@ -984,7 +990,7 @@
           </span>
           <h1>Jewellery that speaks softly — and lasts a lifetime</h1>
           <p>Each piece at Diana's Sparkle is hand-designed and handcrafted with careful attention to detail. We prioritize timeless shapes, quality materials and a gentle, feminine aesthetic.</p>
-
+          
           <div class="hero-cta">
             <a class="btn btn-primary" href="#collection">
               <i class="fas fa-gem"></i>
@@ -1000,7 +1006,7 @@
             Prefer a direct chat? <strong style="color: var(--accent-2);">Call or message us</strong> and we'll guide you through bespoke options.
           </div>
         </div>
-
+        
         <div class="hero-image">
           <img src="front.png" alt="Featured jewellery piece" onerror="this.src='placeholder-hero.png'" class="animate-float">
           <div class="floating-elements">
@@ -1354,9 +1360,9 @@
     function toggleMobileMenu() {
       const mobileMenu = document.getElementById('mobileMenu');
       const hamburgerIcon = document.getElementById('hamburgerIcon');
-
+      
       mobileMenuOpen = !mobileMenuOpen;
-
+      
       if (mobileMenuOpen) {
         mobileMenu.classList.add('active');
         hamburgerIcon.classList.remove('fa-bars');
@@ -1371,7 +1377,7 @@
     function closeMobileMenu() {
       const mobileMenu = document.getElementById('mobileMenu');
       const hamburgerIcon = document.getElementById('hamburgerIcon');
-
+      
       mobileMenuOpen = false;
       mobileMenu.classList.remove('active');
       hamburgerIcon.classList.remove('fa-times');
@@ -1382,7 +1388,7 @@
     document.addEventListener('click', (e) => {
       const mobileMenu = document.getElementById('mobileMenu');
       const hamburger = document.querySelector('.hamburger');
-
+      
       if (mobileMenuOpen && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
         closeMobileMenu();
       }
@@ -1414,7 +1420,7 @@
     window.addEventListener('scroll', () => {
       const sections = document.querySelectorAll('section[id]');
       const navLinks = document.querySelectorAll('nav a');
-
+      
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -1444,7 +1450,7 @@
       const itemWidth = items[0].offsetWidth + 20; // width + gap
       const translateX = -carousels[type].currentIndex * itemWidth;
       track.style.transform = `translateX(${translateX}px)`;
-
+      
       // Update button states
       updateCarouselButtons(type);
     }
@@ -1454,10 +1460,10 @@
       const nextBtn = document.getElementById(type + '-next');
       const carousel = carousels[type];
       const maxIndex = carousel.totalItems - carousel.itemsToShow;
-
+      
       // Disable/enable previous button
       prevBtn.disabled = carousel.currentIndex === 0;
-
+      
       // Disable/enable next button  
       nextBtn.disabled = carousel.currentIndex >= maxIndex;
     }
@@ -1465,7 +1471,7 @@
     function nextSlide(type) {
       const carousel = carousels[type];
       const maxIndex = carousel.totalItems - carousel.itemsToShow;
-
+      
       if (carousel.currentIndex < maxIndex) {
         carousel.currentIndex++;
         updateCarousel(type);
@@ -1474,7 +1480,7 @@
 
     function prevSlide(type) {
       const carousel = carousels[type];
-
+      
       if (carousel.currentIndex > 0) {
         carousel.currentIndex--;
         updateCarousel(type);
@@ -1490,13 +1496,13 @@
         } else {
           carousels[type].itemsToShow = 2;
         }
-
+        
         // Reset position if current index is invalid
         const maxIndex = carousels[type].totalItems - carousels[type].itemsToShow;
         if (carousels[type].currentIndex > maxIndex) {
           carousels[type].currentIndex = Math.max(0, maxIndex);
         }
-
+        
         updateCarousel(type);
       });
     }
@@ -1506,7 +1512,7 @@
       Object.keys(carousels).forEach(type => {
         const carousel = carousels[type];
         const maxIndex = carousel.totalItems - carousel.itemsToShow;
-
+        
         if (carousel.currentIndex < maxIndex) {
           nextSlide(type);
         } else {
@@ -1563,22 +1569,22 @@
     // Form submission handling
     document.querySelector('.form-grid').addEventListener('submit', function(e) {
       e.preventDefault();
-
+      
       // Get form data
       const formData = new FormData(this);
       const name = formData.get('name');
       const email = formData.get('email');
       const subject = formData.get('subject');
       const message = formData.get('message');
-
+      
       // Create mailto link
       const mailtoSubject = subject ? subject : 'Enquiry from ' + name;
       const mailtoBody = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
       const mailtoLink = `mailto:najigold@yahoo.com?subject=${encodeURIComponent(mailtoSubject)}&body=${mailtoBody}`;
-
+      
       // Open mail client
       window.location.href = mailtoLink;
-
+      
       // Show success message
       alert('Thank you for your enquiry! Your default email client should now open with your message.');
     });
