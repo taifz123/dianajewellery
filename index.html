@@ -496,12 +496,14 @@
       position: relative;
       overflow: hidden;
       border-radius: 12px;
+      width: 100%;
     }
 
     .carousel-track {
       display: flex;
       transition: transform 0.5s ease;
       gap: 20px;
+      width: 100%;
     }
 
     .carousel-item {
@@ -723,7 +725,7 @@
       transition: width 0.1s ease;
     }
 
-    /* IMPROVED Mobile Responsive - FIXED IMAGE PROPORTIONS */
+    /* FIXED Mobile Responsive - PROPER MOBILE CAROUSEL */
     @media (max-width: 768px) {
       .container {
         padding: 0 16px;
@@ -810,9 +812,27 @@
         order: 2;
       }
       
-      /* FIXED MOBILE CAROUSEL IMAGES */
+      /* PROPERLY FIXED MOBILE CAROUSEL */
+      .carousel-wrapper {
+        width: 100%;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+      
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease;
+        gap: 0; /* NO GAP ON MOBILE */
+        width: 300%; /* 3 items × 100% each */
+      }
+      
       .carousel-item {
-        min-width: 100%; /* Full width on mobile */
+        min-width: 100% !important; /* FORCE full width */
+        flex-shrink: 0;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow-1);
       }
 
       .carousel-item img {
@@ -821,10 +841,8 @@
         object-fit: contain;
         background: #f9f9f9;
         border-radius: 12px 12px 0 0;
-      }
-
-      .carousel-track {
-        gap: 16px; /* Smaller gap */
+        width: 100%;
+        display: block;
       }
 
       .carousel-header {
@@ -909,7 +927,6 @@
         font-size: 12px;
       }
 
-      /* OPTIMAL MOBILE IMAGE SIZE */
       .carousel-item img {
         height: 200px; /* Even more proportional */
         padding: 6px; /* Minimal padding */
@@ -1472,12 +1489,21 @@
       'bracelets': { currentIndex: 0, itemsToShow: 2, totalItems: 3 }
     };
 
+    // FIXED Mobile Carousel JavaScript
     function updateCarousel(type) {
       const track = document.getElementById(type + '-track');
       const items = track.querySelectorAll('.carousel-item');
-      const itemWidth = items[0].offsetWidth + 20; // width + gap
-      const translateX = -carousels[type].currentIndex * itemWidth;
-      track.style.transform = `translateX(${translateX}px)`;
+      
+      if (window.innerWidth < 768) {
+        // Mobile: use percentage-based transforms
+        const translateX = -carousels[type].currentIndex * 100;
+        track.style.transform = `translateX(${translateX}%)`;
+      } else {
+        // Desktop: original behavior
+        const itemWidth = items[0].offsetWidth + 20; // width + gap
+        const translateX = -carousels[type].currentIndex * itemWidth;
+        track.style.transform = `translateX(${translateX}px)`;
+      }
       
       // Update button states
       updateCarouselButtons(type);
@@ -1520,9 +1546,9 @@
       const width = window.innerWidth;
       Object.keys(carousels).forEach(type => {
         if (width < 768) {
-          carousels[type].itemsToShow = 1;
+          carousels[type].itemsToShow = 1; // Mobile: 1 item at a time
         } else {
-          carousels[type].itemsToShow = 2;
+          carousels[type].itemsToShow = 2; // Desktop: 2 items at a time
         }
         
         // Reset position if current index is invalid
