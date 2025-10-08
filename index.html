@@ -12,952 +12,308 @@
 
   <style>
     :root {
-      --bg: #fffdfb;
-      --muted: #6b7280;
-      --accent: #d4af37; /* gold */
-      --accent-2: #b88722;
-      --deep: #0f1724;
-      --card: #ffffff;
-      --glass: rgba(255,255,255,0.8);
-      --radius: 16px;
-      --max-width: 1400px;
-      --transition: 300ms cubic-bezier(.2,.9,.3,1);
-      --shadow-1: 0 8px 25px rgba(16,24,40,0.08);
-      --shadow-2: 0 20px 60px rgba(16,24,40,0.12);
-      --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4e5ab 100%);
+      --bg: #fffdfb; --muted: #6b7280; --accent: #d4af37; --accent-2: #b88722; --deep: #0f1724;
+      --card: #ffffff; --glass: rgba(255,255,255,0.8); --radius: 16px; --max-width: 1400px;
+      --transition: 300ms cubic-bezier(.2,.9,.3,1); --shadow-1: 0 8px 25px rgba(16,24,40,0.08);
+      --shadow-2: 0 20px 60px rgba(16,24,40,0.12); --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4e5ab 100%);
       --gradient-bg: linear-gradient(135deg, #fffdfb 0%, #f8f6f0 100%);
     }
 
     * { box-sizing: border-box; }
-    
-    html { 
-      scroll-behavior: smooth; 
-      scroll-padding-top: 80px;
-    }
-    
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
     body {
-      margin: 0;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
-      color: var(--deep);
-      background: var(--gradient-bg);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      line-height: 1.6;
-      overflow-x: hidden;
+      margin: 0; font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      color: var(--deep); background: var(--gradient-bg); -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale; line-height: 1.6; overflow-x: hidden;
     }
 
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
+    .animate-fade-up { animation: fadeInUp 0.6s ease-out; }
+    .animate-slide-in { animation: slideIn 0.5s ease-out; }
+    .animate-float { animation: float 3s ease-in-out infinite; }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .animate-fade-up {
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    .animate-slide-in {
-      animation: slideIn 0.5s ease-out;
-    }
-
-    .animate-float {
-      animation: float 3s ease-in-out infinite;
-    }
-
-    /* Utilities */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
 
     /* Header */
     header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 100;
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(212,175,55,0.1);
-      transition: all var(--transition);
+      position: fixed; top: 0; width: 100%; z-index: 100; background: var(--glass);
+      backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212,175,55,0.1); transition: all var(--transition);
     }
-
-    .nav-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 0;
-      gap: 16px;
-    }
-
+    .nav-wrap { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; gap: 16px; }
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: "Playfair Display", serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--deep);
-      text-decoration: none;
-      min-width: 0;
+      display: flex; align-items: center; gap: 12px; font-family: "Playfair Display", serif;
+      font-size: 20px; font-weight: 700; color: var(--deep); text-decoration: none; min-width: 0;
     }
+    .brand img { height: 44px; width: 44px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+    .brand-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    .brand img {
-      height: 44px;
-      width: 44px;
-      border-radius: 10px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .brand-text {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Navigation - Desktop */
-    nav.desktop {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
+    nav.desktop { display: flex; align-items: center; gap: 24px; }
     nav.desktop a {
-      color: var(--muted);
-      font-weight: 500;
-      padding: 10px 16px;
-      border-radius: 25px;
-      transition: all var(--transition);
-      position: relative;
-      white-space: nowrap;
-      text-decoration: none;
+      color: var(--muted); font-weight: 500; padding: 10px 16px; border-radius: 25px;
+      transition: all var(--transition); text-decoration: none; white-space: nowrap;
     }
+    nav.desktop a:hover { color: var(--accent); background: rgba(212,175,55,0.1); transform: translateY(-1px); }
+    nav.desktop a.active { color: white; background: var(--gradient-gold); box-shadow: var(--shadow-1); }
 
-    nav.desktop a:hover {
-      color: var(--accent);
-      background: rgba(212,175,55,0.1);
-      transform: translateY(-1px);
-    }
-
-    nav.desktop a.active {
-      color: white;
-      background: var(--gradient-gold);
-      box-shadow: var(--shadow-1);
-    }
-
-    /* Mobile Navigation */
-    .mobile-nav {
-      display: none;
-    }
-
+    .mobile-nav { display: none; }
     .hamburger {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      border: 1px solid rgba(212,175,55,0.2);
-      background: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 44px; height: 44px; border-radius: 10px; border: 1px solid rgba(212,175,55,0.2);
+      background: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
       transition: all var(--transition);
     }
-
-    .hamburger:hover {
-      background: rgba(212,175,55,0.1);
-      border-color: var(--accent);
-    }
+    .hamburger:hover { background: rgba(212,175,55,0.1); border-color: var(--accent); }
 
     .mobile-menu {
-      position: fixed;
-      top: 80px;
-      left: 0;
-      width: 100%;
-      background: white;
-      box-shadow: var(--shadow-2);
-      transform: translateY(-100%);
-      opacity: 0;
-      transition: all var(--transition);
-      z-index: 99;
-      border-top: 1px solid rgba(212,175,55,0.1);
+      position: fixed; top: 80px; left: 0; width: 100%; background: white; box-shadow: var(--shadow-2);
+      transform: translateY(-100%); opacity: 0; transition: all var(--transition); z-index: 99;
     }
-
-    .mobile-menu.active {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .mobile-menu nav {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
+    .mobile-menu.active { transform: translateY(0); opacity: 1; }
+    .mobile-menu nav { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
     .mobile-menu nav a {
-      color: var(--deep);
-      font-weight: 500;
-      padding: 12px 16px;
-      border-radius: 12px;
-      transition: all var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
+      color: var(--deep); font-weight: 500; padding: 12px 16px; border-radius: 12px;
+      transition: all var(--transition); display: flex; align-items: center; gap: 10px; text-decoration: none;
     }
+    .mobile-menu nav a:hover { background: rgba(212,175,55,0.1); color: var(--accent); }
+    .mobile-menu nav a.active { background: var(--gradient-gold); color: white; }
 
-    .mobile-menu nav a:hover {
-      background: rgba(212,175,55,0.1);
-      color: var(--accent);
-    }
-
-    .mobile-menu nav a.active {
-      background: var(--gradient-gold);
-      color: white;
-    }
-
-    /* Buttons */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 20px;
-      border-radius: 25px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all var(--transition);
-      border: none;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 25px;
+      font-weight: 600; cursor: pointer; transition: all var(--transition); border: none; text-decoration: none;
+      position: relative; overflow: hidden; white-space: nowrap;
     }
+    .btn-primary { background: var(--gradient-gold); color: white; box-shadow: var(--shadow-1); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+    .btn-outline { background: transparent; border: 2px solid var(--accent); color: var(--accent); }
+    .btn-outline:hover { background: var(--accent); color: white; transform: translateY(-1px); }
 
-    .btn-primary {
-      background: var(--gradient-gold);
-      color: white;
-      box-shadow: var(--shadow-1);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-2);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--accent);
-      color: var(--accent);
-    }
-
-    .btn-outline:hover {
-      background: var(--accent);
-      color: white;
-      transform: translateY(-1px);
-    }
-
-    /* Header CTA */
-    .header-cta {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
+    .header-cta { display: flex; gap: 8px; align-items: center; }
 
     /* Hero Section */
     .hero {
       padding: 100px 0 60px;
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(212,175,55,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(212,175,55,0.08) 0%, transparent 50%),
-        var(--gradient-bg);
-      position: relative;
-      overflow: hidden;
+      background: radial-gradient(circle at 20% 80%, rgba(212,175,55,0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(212,175,55,0.08) 0%, transparent 50%), var(--gradient-bg);
+      position: relative; overflow: hidden;
     }
-
     .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 50%;
-      height: 100%;
+      content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%;
       background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23d4af37" opacity="0.1"/></svg>');
       opacity: 0.5;
     }
-
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-text {
-      animation: fadeInUp 0.8s ease-out;
-    }
+    .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; position: relative; z-index: 2; }
+    .hero-text { animation: fadeInUp 0.8s ease-out; }
 
     .eyebrow {
-      display: inline-block;
-      background: rgba(212,175,55,0.15);
-      color: var(--accent-2);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      border: 1px solid rgba(212,175,55,0.2);
+      display: inline-block; background: rgba(212,175,55,0.15); color: var(--accent-2);
+      padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 600;
+      margin-bottom: 20px; border: 1px solid rgba(212,175,55,0.2);
     }
-
     .hero h1 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(1.8rem, 4vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin: 0 0 20px 0;
-      color: var(--deep);
+      font-family: "Playfair Display", serif; font-size: clamp(1.8rem, 4vw, 3.5rem);
+      font-weight: 700; line-height: 1.2; margin: 0 0 20px 0; color: var(--deep);
     }
+    .hero p { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--muted); margin-bottom: 24px; line-height: 1.7; }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
 
-    .hero p {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: var(--muted);
-      margin-bottom: 24px;
-      line-height: 1.7;
-    }
+    .hero-image { position: relative; animation: fadeInUp 0.8s ease-out 0.2s both; }
+    .hero-image img { width: 100%; border-radius: 20px; box-shadow: var(--shadow-2); transition: transform var(--transition); }
+    .hero-image:hover img { transform: scale(1.02); }
 
-    .hero-cta {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    /* Hero Image */
-    .hero-image {
-      position: relative;
-      animation: fadeInUp 0.8s ease-out 0.2s both;
-    }
-
-    .hero-image img {
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: var(--shadow-2);
-      transition: transform var(--transition);
-    }
-
-    .hero-image:hover img {
-      transform: scale(1.02);
-    }
-
-    .floating-elements {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      display: flex;
-      gap: 8px;
-    }
-
+    .floating-elements { position: absolute; top: 15px; right: 15px; display: flex; gap: 8px; }
     .floating-badge {
-      background: white;
-      padding: 8px 12px;
-      border-radius: 12px;
-      box-shadow: var(--shadow-1);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
-      animation: float 3s ease-in-out infinite;
+      background: white; padding: 8px 12px; border-radius: 12px; box-shadow: var(--shadow-1);
+      font-size: 12px; font-weight: 600; color: var(--accent); animation: float 3s ease-in-out infinite;
     }
 
     /* Section Styling */
-    .section {
-      padding: 60px 0;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
+    .section { padding: 60px 0; }
+    .section-header { text-align: center; margin-bottom: 40px; }
     .section-title {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      font-weight: 700;
-      margin: 0 0 12px 0;
-      color: var(--deep);
+      font-family: "Playfair Display", serif; font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700; margin: 0 0 12px 0; color: var(--deep);
     }
-
     .section-subtitle {
-      font-size: clamp(1rem, 2vw, 1.1rem);
-      color: var(--muted);
-      margin: 0 0 16px 0;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
+      font-size: clamp(1rem, 2vw, 1.1rem); color: var(--muted); margin: 0 0 16px 0;
+      max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;
     }
-
     .collection-note {
-      font-size: 0.95rem;
-      color: var(--accent-2);
-      font-style: italic;
-      margin: 0 0 24px 0;
-      background: rgba(212,175,55,0.08);
-      padding: 12px 20px;
-      border-radius: 12px;
-      border-left: 4px solid var(--accent);
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: 0.95rem; color: var(--accent-2); font-style: italic; margin: 0 0 24px 0;
+      background: rgba(212,175,55,0.08); padding: 12px 20px; border-radius: 12px;
+      border-left: 4px solid var(--accent); max-width: 700px; margin-left: auto; margin-right: auto;
     }
 
-    /* Carousel Styles - FIXED IMAGE DISPLAY */
-    .carousel-container {
-      margin-bottom: 50px;
-      position: relative;
+    /* DESKTOP CAROUSEL - Original horizontal carousel */
+    .collection-container { margin-bottom: 50px; position: relative; }
+    .collection-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px; }
+    .collection-title {
+      font-family: "Playfair Display", serif; font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 700; color: var(--deep); margin: 0; display: flex; align-items: center; gap: 10px;
     }
 
-    .carousel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      gap: 16px;
-    }
-
-    .carousel-title {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(1.4rem, 3vw, 1.8rem);
-      font-weight: 700;
-      color: var(--deep);
-      margin: 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .carousel-nav {
-      display: flex;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-
+    .carousel-nav { display: flex; gap: 6px; flex-shrink: 0; }
     .carousel-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: white;
-      border: 2px solid var(--accent);
-      color: var(--accent);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all var(--transition);
-      font-size: 14px;
+      width: 40px; height: 40px; border-radius: 50%; background: white; border: 2px solid var(--accent);
+      color: var(--accent); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all var(--transition); font-size: 14px;
+    }
+    .carousel-btn:hover { background: var(--accent); color: white; transform: scale(1.05); }
+    .carousel-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .carousel-wrapper { position: relative; overflow: hidden; border-radius: 12px; }
+    .carousel-track { display: flex; transition: transform 0.5s ease; gap: 20px; }
+    .collection-item {
+      min-width: calc(50% - 10px); flex-shrink: 0; background: white; border-radius: 12px;
+      overflow: hidden; box-shadow: var(--shadow-1); transition: all var(--transition);
+    }
+    .collection-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+
+    .collection-item img {
+      width: 100%; height: 350px; object-fit: contain; background: #f9f9f9;
+      border-radius: 12px 12px 0 0; padding: 15px;
     }
 
-    .carousel-btn:hover {
-      background: var(--accent);
-      color: white;
-      transform: scale(1.05);
+    .collection-content { padding: 24px; }
+    .collection-content h3 {
+      font-family: "Playfair Display", serif; font-size: 1.3rem; margin: 0 0 10px 0;
+      color: var(--deep); line-height: 1.3;
     }
-
-    .carousel-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .carousel-wrapper {
-      position: relative;
-      overflow: hidden;
-      border-radius: 12px;
-      width: 100%;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease;
-      gap: 20px;
-      width: 100%;
-    }
-
-    .carousel-item {
-      min-width: calc(50% - 10px);
-      flex-shrink: 0;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: var(--shadow-1);
-      transition: all var(--transition);
-    }
-
-    .carousel-item:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-2);
-    }
-
-    /* FIXED - Complete image display without cropping */
-    .carousel-item img {
-      width: 100%;
-      height: 350px; /* Large height to showcase jewelry properly */
-      object-fit: contain; /* Shows complete image without cropping */
-      background: #f9f9f9; /* Light background for empty space */
-      border-radius: 12px 12px 0 0;
-      padding: 15px; /* Padding around the image */
-    }
-
-    .carousel-content {
-      padding: 24px; /* Increased padding */
-    }
-
-    .carousel-content h3 {
-      font-family: "Playfair Display", serif;
-      font-size: 1.3rem; /* Slightly larger */
-      margin: 0 0 10px 0;
-      color: var(--deep);
-      line-height: 1.3;
-    }
-
-    .carousel-content p {
-      color: var(--muted);
-      margin: 0 0 16px 0;
-      line-height: 1.5;
-      font-size: 1rem;
-    }
+    .collection-content p { color: var(--muted); margin: 0 0 16px 0; line-height: 1.5; font-size: 1rem; }
 
     .badge {
-      display: inline-block;
-      background: rgba(212,175,55,0.15);
-      color: var(--accent-2);
-      padding: 6px 12px;
-      border-radius: 16px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 14px;
+      display: inline-block; background: rgba(212,175,55,0.15); color: var(--accent-2);
+      padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600; margin-bottom: 14px;
     }
 
     /* About Section */
-    .about {
-      background: white;
-      position: relative;
-      overflow: hidden;
-    }
-
+    .about { background: white; position: relative; overflow: hidden; }
     .about::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
       background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
       animation: float 20s ease-in-out infinite;
     }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .about-text {
-      animation: slideIn 0.6s ease-out;
-    }
-
-    .about img {
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: var(--shadow-2);
-    }
+    .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; position: relative; z-index: 2; }
+    .about-text { animation: slideIn 0.6s ease-out; }
+    .about img { width: 100%; border-radius: 20px; box-shadow: var(--shadow-2); }
 
     /* Contact Section */
-    .contact {
-      background: var(--gradient-bg);
+    .contact { background: var(--gradient-bg); }
+    .contact-content { max-width: 800px; margin: 0 auto; }
+    .contact-form { background: white; padding: 32px; border-radius: 20px; box-shadow: var(--shadow-1); margin-bottom: 32px; }
+    .form-grid { display: grid; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-grid input, .form-grid textarea {
+      padding: 12px 16px; border: 2px solid rgba(212,175,55,0.2); border-radius: 12px;
+      font-size: 16px; transition: all var(--transition); font-family: inherit;
+    }
+    .form-grid input:focus, .form-grid textarea:focus {
+      outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
     }
 
-    .contact-content {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .contact-form {
-      background: white;
-      padding: 32px;
-      border-radius: 20px;
-      box-shadow: var(--shadow-1);
-      margin-bottom: 32px;
-    }
-
-    .form-grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .form-grid input,
-    .form-grid textarea {
-      padding: 12px 16px;
-      border: 2px solid rgba(212,175,55,0.2);
-      border-radius: 12px;
-      font-size: 16px;
-      transition: all var(--transition);
-      font-family: inherit;
-    }
-
-    .form-grid input:focus,
-    .form-grid textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
-    }
-
-    .contact-info {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
+    .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
     .contact-card {
-      background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: var(--shadow-1);
-      transition: transform var(--transition);
-      text-align: center;
+      background: white; padding: 24px; border-radius: 16px; box-shadow: var(--shadow-1);
+      transition: transform var(--transition); text-align: center;
     }
-
-    .contact-card:hover {
-      transform: translateY(-3px);
-    }
-
+    .contact-card:hover { transform: translateY(-3px); }
     .contact-icon {
-      width: 50px;
-      height: 50px;
-      background: var(--gradient-gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 12px;
-      color: white;
-      font-size: 20px;
+      width: 50px; height: 50px; background: var(--gradient-gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: white; font-size: 20px;
     }
+    .contact-card h3 { margin: 0 0 8px 0; font-size: 1.1rem; color: var(--deep); }
+    .contact-card p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+    .contact-card strong { color: var(--accent-2); font-weight: 600; }
 
-    .contact-card h3 {
-      margin: 0 0 8px 0;
-      font-size: 1.1rem;
-      color: var(--deep);
-    }
+    footer { background: var(--deep); color: white; padding: 32px 0; text-align: center; }
+    footer p { margin: 0; color: rgba(255,255,255,0.7); font-size: 0.95rem; }
 
-    .contact-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
+    .scroll-indicator { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: rgba(212,175,55,0.2); z-index: 101; }
+    .scroll-progress { height: 100%; background: var(--gradient-gold); width: 0; transition: width 0.1s ease; }
 
-    .contact-card strong {
-      color: var(--accent-2);
-      font-weight: 600;
-    }
-
-    /* Footer */
-    footer {
-      background: var(--deep);
-      color: white;
-      padding: 32px 0;
-      text-align: center;
-    }
-
-    footer p {
-      margin: 0;
-      color: rgba(255,255,255,0.7);
-      font-size: 0.95rem;
-    }
-
-    /* Scroll indicator */
-    .scroll-indicator {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: rgba(212,175,55,0.2);
-      z-index: 101;
-    }
-
-    .scroll-progress {
-      height: 100%;
-      background: var(--gradient-gold);
-      width: 0;
-      transition: width 0.1s ease;
-    }
-
-    /* FIXED Mobile Responsive - PROPER MOBILE CAROUSEL */
+    /* MOBILE - VERTICAL STACK LAYOUT (NO CAROUSEL) */
     @media (max-width: 768px) {
-      .container {
-        padding: 0 16px;
-      }
-
-      .nav-wrap {
-        padding: 10px 0;
+      .container { padding: 0 16px; }
+      .nav-wrap { padding: 10px 0; }
+      .brand { font-size: 18px; gap: 10px; }
+      .brand img { height: 40px; width: 40px; }
+      nav.desktop { display: none; }
+      .mobile-nav { display: block; }
+      .header-cta { gap: 6px; }
+      .header-cta .btn { padding: 10px 14px; font-size: 14px; }
+      
+      .hero { padding: 80px 0 40px; }
+      .hero-content { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+      .hero-text { order: 2; }
+      .hero-image { order: 1; }
+      .hero-cta { justify-content: center; gap: 10px; }
+      .hero-cta .btn { flex: 1; justify-content: center; min-width: 140px; }
+      .floating-elements { top: 10px; right: 10px; gap: 6px; }
+      .floating-badge { padding: 6px 10px; font-size: 11px; }
+      
+      .about-content { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+      .about-text { order: 2; }
+      
+      /* MOBILE: VERTICAL STACK - NO CAROUSEL */
+      .carousel-nav { display: none; } /* Hide navigation on mobile */
+      
+      .collection-header { 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 12px; 
+        text-align: center;
       }
       
-      .brand {
-        font-size: 18px;
-        gap: 10px;
+      .carousel-wrapper { 
+        overflow: visible; /* Allow all items to show */
+        border-radius: 12px; 
       }
-
-      .brand img {
-        height: 40px;
-        width: 40px;
+      
+      .carousel-track { 
+        display: block; /* Stack vertically */
+        gap: 0; 
+        transform: none !important; /* Remove any transforms */
       }
-
-      nav.desktop {
-        display: none;
-      }
-
-      .mobile-nav {
+      
+      .collection-item {
+        min-width: 100%; /* Full width */
+        margin-bottom: 24px; /* Space between items */
         display: block;
       }
 
-      .header-cta {
-        gap: 6px;
-      }
-
-      .header-cta .btn {
-        padding: 10px 14px;
-        font-size: 14px;
-      }
-      
-      .hero {
-        padding: 80px 0 40px;
-      }
-      
-      .hero-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        text-align: center;
-      }
-
-      .hero-text {
-        order: 2;
-      }
-
-      .hero-image {
-        order: 1;
-      }
-      
-      .hero-cta {
-        justify-content: center;
-        gap: 10px;
-      }
-
-      .hero-cta .btn {
-        flex: 1;
-        justify-content: center;
-        min-width: 140px;
-      }
-
-      .floating-elements {
-        top: 10px;
-        right: 10px;
-        gap: 6px;
-      }
-
-      .floating-badge {
-        padding: 6px 10px;
-        font-size: 11px;
-      }
-      
-      .about-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        text-align: center;
-      }
-
-      .about-text {
-        order: 2;
-      }
-      
-      /* PROPERLY FIXED MOBILE CAROUSEL */
-      .carousel-wrapper {
+      .collection-item img {
+        height: 280px; /* Good mobile height */
+        padding: 12px;
         width: 100%;
-        overflow: hidden;
-        border-radius: 12px;
       }
+
+      .collection-title { font-size: 1.4rem; gap: 8px; justify-content: center; }
+      .collection-content { padding: 20px; }
+      .collection-content h3 { font-size: 1.2rem; text-align: center; }
+      .collection-content p { font-size: 0.95rem; text-align: center; }
+      .badge { display: block; text-align: center; width: fit-content; margin: 0 auto 12px; }
+      .collection-content .btn { display: block; width: fit-content; margin: 0 auto; }
       
-      .carousel-track {
-        display: flex;
-        transition: transform 0.5s ease;
-        gap: 0; /* NO GAP ON MOBILE */
-        width: 300%; /* 3 items × 100% each */
-      }
-      
-      .carousel-item {
-        min-width: 100% !important; /* FORCE full width */
-        flex-shrink: 0;
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: var(--shadow-1);
-      }
-
-      .carousel-item img {
-        height: 220px; /* Better proportions for mobile */
-        padding: 8px; /* Less padding */
-        object-fit: contain;
-        background: #f9f9f9;
-        border-radius: 12px 12px 0 0;
-        width: 100%;
-        display: block;
-      }
-
-      .carousel-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      .carousel-nav {
-        align-self: flex-end;
-      }
-
-      .carousel-title {
-        font-size: 1.3rem;
-        gap: 8px;
-      }
-
-      .carousel-content {
-        padding: 16px; /* Reduced padding */
-      }
-
-      .carousel-content h3 {
-        font-size: 1.1rem; /* Smaller heading */
-      }
-
-      .carousel-content p {
-        font-size: 0.9rem; /* Smaller text */
-      }
-      
-      .section {
-        padding: 40px 0;
-      }
-
-      .section-header {
-        margin-bottom: 30px;
-      }
-
-      .carousel-container {
-        margin-bottom: 40px;
-      }
-
-      .contact-form {
-        padding: 24px;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .contact-info {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .contact-card {
-        padding: 20px;
-      }
-
-      .mobile-menu {
-        top: 70px;
-      }
+      .section { padding: 40px 0; }
+      .section-header { margin-bottom: 30px; }
+      .collection-container { margin-bottom: 40px; }
+      .contact-form { padding: 24px; }
+      .form-row { grid-template-columns: 1fr; gap: 12px; }
+      .contact-info { grid-template-columns: 1fr; gap: 16px; }
+      .contact-card { padding: 20px; }
+      .mobile-menu { top: 70px; }
     }
 
-    /* Extra small screens - FURTHER MOBILE IMPROVEMENTS */
     @media (max-width: 480px) {
-      .container {
-        padding: 0 12px;
-      }
-
-      .hero {
-        padding: 70px 0 30px;
-      }
-
-      .section {
-        padding: 30px 0;
-      }
-
-      .carousel-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 12px;
-      }
-
-      .carousel-item img {
-        height: 200px; /* Even more proportional */
-        padding: 6px; /* Minimal padding */
-      }
-
-      .carousel-content {
-        padding: 14px; /* Compact padding */
-      }
-
-      .carousel-content h3 {
-        font-size: 1.05rem; /* Compact heading */
-      }
-
-      .carousel-content p {
-        font-size: 0.85rem; /* Compact text */
-        line-height: 1.4;
-      }
-
-      .contact-form {
-        padding: 20px;
-      }
-
-      .btn {
-        padding: 10px 16px;
-        font-size: 14px;
-      }
-
-      .badge {
-        font-size: 11px;
-        padding: 4px 8px;
-      }
+      .container { padding: 0 12px; }
+      .hero { padding: 70px 0 30px; }
+      .section { padding: 30px 0; }
+      .collection-item img { height: 250px; padding: 10px; }
+      .collection-content { padding: 16px; }
+      .contact-form { padding: 20px; }
+      .btn { padding: 10px 16px; font-size: 14px; }
+      .badge { font-size: 11px; padding: 4px 8px; }
     }
   </style>
 </head>
@@ -1065,7 +421,7 @@
     </div>
   </section>
 
-  <!-- Collection Section with 3 Carousels -->
+  <!-- Collection Section -->
   <section id="collection" class="section">
     <div class="container">
       <div class="section-header animate-fade-up">
@@ -1077,10 +433,10 @@
         </div>
       </div>
 
-      <!-- Earrings & Rings Carousel -->
-      <div class="carousel-container">
-        <div class="carousel-header">
-          <h3 class="carousel-title">
+      <!-- Earrings & Rings Collection -->
+      <div class="collection-container">
+        <div class="collection-header">
+          <h3 class="collection-title">
             <i class="fas fa-gem" style="color: var(--accent);"></i>
             Earrings & Rings
           </h3>
@@ -1095,9 +451,9 @@
         </div>
         <div class="carousel-wrapper">
           <div class="carousel-track" id="earrings-track">
-            <div class="carousel-item">
+            <div class="collection-item">
               <img src="v1.png" alt="Earring Hoop Design" onerror="this.src='placeholder-1.png'">
-              <div class="carousel-content">
+              <div class="collection-content">
                 <span class="badge">
                   <i class="fas fa-circle-notch"></i>
                   Hoop Style
@@ -1110,9 +466,9 @@
                 </a>
               </div>
             </div>
-            <div class="carousel-item">
+            <div class="collection-item">
               <img src="v2.png" alt="21K Twisted Bracelet" onerror="this.src='placeholder-2.png'">
-              <div class="carousel-content">
+              <div class="collection-content">
                 <span class="badge">
                   <i class="fas fa-crown"></i>
                   21K Gold
@@ -1125,9 +481,9 @@
                 </a>
               </div>
             </div>
-            <div class="carousel-item">
+            <div class="collection-item">
               <img src="v3.png" alt="Double Band Engagement Ring" onerror="this.src='placeholder-3.png'">
-              <div class="carousel-content">
+              <div class="collection-content">
                 <span class="badge">
                   <i class="fas fa-heart"></i>
                   Engagement
@@ -1144,10 +500,10 @@
         </div>
       </div>
 
-      <!-- Necklaces & Pendants Carousel -->
-      <div class="carousel-container">
-        <div class="carousel-header">
-          <h3 class="carousel-title">
+      <!-- Necklaces & Pendants Collection -->
+      <div class="collection-container">
+        <div class="collection-header">
+          <h3 class="collection-title">
             <i class="fas fa-circle-notch" style="color: var(--accent);"></i>
             Necklaces & Pendants
           </h3>
@@ -1162,9 +518,9 @@
         </div>
         <div class="carousel-wrapper">
           <div class="carousel-track" id="necklaces-track">
-            <div class="carousel-item">
+            <div class="collection-item">
               <img src="v4.png" alt="18K Gold Love Knot Pendant Necklace" onerror="this.src='placeholder-4.png'">
-              <div class="carousel-content">
+              <div class="collection-content">
                 <span class="badge">
                   <i class="fas fa-heart"></i>
                   18K Gold
@@ -1177,9 +533,9 @@
                 </a>
               </div>
             </div>
-            <div class="carousel-item">
+            <div class="collection-item">
               <img src="v5.png" alt="Twisted Bangle Design" onerror="this.src='placeholder-5.png'">
-              <div class="carousel-content">
+              <div class="collection-content">
                 <span class="badge">
                   <i class="fas fa-circle"></i>
                   Twisted Design
@@ -1192,9 +548,9 @@
                 </a>
               </div>
             </div>
-            <div class="carousel-item">
+            <div class="collection-item">
               <img src="v6.png" alt="Coin Bracelet Design" onerror="this.src='placeholder-6.png'">
-              <div class="carousel-content">
+              <div class="collection-content">
                 <span class="badge">
                   <i class="fas fa-coins"></i>
                   Coin Style
@@ -1211,10 +567,10 @@
         </div>
       </div>
 
-      <!-- Men's & Chain Collection Carousel -->
-      <div class="carousel-container">
-        <div class="carousel-header">
-          <h3 class="carousel-title">
+      <!-- Men's & Chain Collection -->
+      <div class="collection-container">
+        <div class="collection-header">
+          <h3 class="collection-title">
             <i class="fas fa-link" style="color: var(--accent);"></i>
             Men's & Chain Collection
           </h3>
@@ -1229,9 +585,9 @@
         </div>
         <div class="carousel-wrapper">
           <div class="carousel-track" id="bracelets-track">
-            <div class="carousel-item">
+            <div class="collection-item">
               <img src="v7.png" alt="Nail Bracelet Design" onerror="this.src='placeholder-7.png'">
-              <div class="carousel-content">
+              <div class="collection-content">
                 <span class="badge">
                   <i class="fas fa-shield-alt"></i>
                   Bold Design
@@ -1244,9 +600,9 @@
                 </a>
               </div>
             </div>
-            <div class="carousel-item">
+            <div class="collection-item">
               <img src="v8.png" alt="Chain for Men" onerror="this.src='placeholder-8.png'">
-              <div class="carousel-content">
+              <div class="collection-content">
                 <span class="badge">
                   <i class="fas fa-male"></i>
                   Men's Collection
@@ -1259,9 +615,9 @@
                 </a>
               </div>
             </div>
-            <div class="carousel-item">
+            <div class="collection-item">
               <img src="v9.png" alt="Premium Necklace Design" onerror="this.src='placeholder-9.png'">
-              <div class="carousel-content">
+              <div class="collection-content">
                 <span class="badge">
                   <i class="fas fa-star"></i>
                   Premium
@@ -1397,7 +753,7 @@
     </div>
   </footer>
 
-  <!-- JavaScript for Interactions -->
+  <!-- SIMPLIFIED JavaScript - Desktop carousel only -->
   <script>
     // Mobile menu functionality
     let mobileMenuOpen = false;
@@ -1482,30 +838,23 @@
       });
     });
 
-    // Carousel functionality with 3 images per carousel (9 total)
+    // DESKTOP CAROUSEL ONLY - Much simpler code
     const carousels = {
       'earrings': { currentIndex: 0, itemsToShow: 2, totalItems: 3 },
       'necklaces': { currentIndex: 0, itemsToShow: 2, totalItems: 3 },
       'bracelets': { currentIndex: 0, itemsToShow: 2, totalItems: 3 }
     };
 
-    // FIXED Mobile Carousel JavaScript
     function updateCarousel(type) {
+      // Only run on desktop
+      if (window.innerWidth < 768) return;
+      
       const track = document.getElementById(type + '-track');
-      const items = track.querySelectorAll('.carousel-item');
+      const items = track.querySelectorAll('.collection-item');
+      const itemWidth = items[0].offsetWidth + 20; // width + gap
+      const translateX = -carousels[type].currentIndex * itemWidth;
+      track.style.transform = `translateX(${translateX}px)`;
       
-      if (window.innerWidth < 768) {
-        // Mobile: use percentage-based transforms
-        const translateX = -carousels[type].currentIndex * 100;
-        track.style.transform = `translateX(${translateX}%)`;
-      } else {
-        // Desktop: original behavior
-        const itemWidth = items[0].offsetWidth + 20; // width + gap
-        const translateX = -carousels[type].currentIndex * itemWidth;
-        track.style.transform = `translateX(${translateX}px)`;
-      }
-      
-      // Update button states
       updateCarouselButtons(type);
     }
 
@@ -1515,14 +864,13 @@
       const carousel = carousels[type];
       const maxIndex = carousel.totalItems - carousel.itemsToShow;
       
-      // Disable/enable previous button
       prevBtn.disabled = carousel.currentIndex === 0;
-      
-      // Disable/enable next button  
       nextBtn.disabled = carousel.currentIndex >= maxIndex;
     }
 
     function nextSlide(type) {
+      if (window.innerWidth < 768) return; // Only desktop
+      
       const carousel = carousels[type];
       const maxIndex = carousel.totalItems - carousel.itemsToShow;
       
@@ -1533,6 +881,8 @@
     }
 
     function prevSlide(type) {
+      if (window.innerWidth < 768) return; // Only desktop
+      
       const carousel = carousels[type];
       
       if (carousel.currentIndex > 0) {
@@ -1541,50 +891,23 @@
       }
     }
 
-    // Responsive carousel adjustment
-    function adjustCarousels() {
-      const width = window.innerWidth;
-      Object.keys(carousels).forEach(type => {
-        if (width < 768) {
-          carousels[type].itemsToShow = 1; // Mobile: 1 item at a time
-        } else {
-          carousels[type].itemsToShow = 2; // Desktop: 2 items at a time
-        }
-        
-        // Reset position if current index is invalid
-        const maxIndex = carousels[type].totalItems - carousels[type].itemsToShow;
-        if (carousels[type].currentIndex > maxIndex) {
-          carousels[type].currentIndex = Math.max(0, maxIndex);
-        }
-        
-        updateCarousel(type);
-      });
-    }
-
-    // Auto-play carousels (optional)
-    function autoPlayCarousels() {
-      Object.keys(carousels).forEach(type => {
-        const carousel = carousels[type];
-        const maxIndex = carousel.totalItems - carousel.itemsToShow;
-        
-        if (carousel.currentIndex < maxIndex) {
-          nextSlide(type);
-        } else {
-          carousel.currentIndex = 0;
-          updateCarousel(type);
-        }
-      });
-    }
-
-    // Initialize carousels on load
+    // Initialize on desktop only
     window.addEventListener('load', () => {
-      adjustCarousels();
-      // Start auto-play every 6 seconds
-      setInterval(autoPlayCarousels, 6000);
+      if (window.innerWidth >= 768) {
+        Object.keys(carousels).forEach(type => {
+          updateCarousel(type);
+        });
+      }
     });
 
-    // Adjust on resize
-    window.addEventListener('resize', adjustCarousels);
+    // Handle resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        Object.keys(carousels).forEach(type => {
+          updateCarousel(type);
+        });
+      }
+    });
 
     // Intersection Observer for animations
     const observerOptions = {
@@ -1601,7 +924,6 @@
       });
     }, observerOptions);
 
-    // Observe all animatable elements
     document.querySelectorAll('.animate-fade-up, .animate-slide-in').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(30px)';
@@ -1624,22 +946,17 @@
     document.querySelector('.form-grid').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      // Get form data
       const formData = new FormData(this);
       const name = formData.get('name');
       const email = formData.get('email');
       const subject = formData.get('subject');
       const message = formData.get('message');
       
-      // Create mailto link
       const mailtoSubject = subject ? subject : 'Enquiry from ' + name;
       const mailtoBody = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
       const mailtoLink = `mailto:najigold@yahoo.com?subject=${encodeURIComponent(mailtoSubject)}&body=${mailtoBody}`;
       
-      // Open mail client
       window.location.href = mailtoLink;
-      
-      // Show success message
       alert('Thank you for your enquiry! Your default email client should now open with your message.');
     });
   </script>
