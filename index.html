@@ -154,6 +154,7 @@
       transition: all var(--transition);
       position: relative;
       white-space: nowrap;
+      text-decoration: none;
     }
 
     nav.desktop a:hover {
@@ -722,7 +723,7 @@
       transition: width 0.1s ease;
     }
 
-    /* Mobile Responsive */
+    /* IMPROVED Mobile Responsive - FIXED IMAGE PROPORTIONS */
     @media (max-width: 768px) {
       .container {
         padding: 0 16px;
@@ -809,13 +810,21 @@
         order: 2;
       }
       
+      /* FIXED MOBILE CAROUSEL IMAGES */
       .carousel-item {
-        min-width: calc(100% - 0px);
+        min-width: 100%; /* Full width on mobile */
       }
 
       .carousel-item img {
-        height: 280px; /* Smaller on mobile but still shows full image */
-        padding: 12px; /* Reduced padding on mobile */
+        height: 220px; /* Better proportions for mobile */
+        padding: 8px; /* Less padding */
+        object-fit: contain;
+        background: #f9f9f9;
+        border-radius: 12px 12px 0 0;
+      }
+
+      .carousel-track {
+        gap: 16px; /* Smaller gap */
       }
 
       .carousel-header {
@@ -834,15 +843,15 @@
       }
 
       .carousel-content {
-        padding: 20px;
+        padding: 16px; /* Reduced padding */
       }
 
       .carousel-content h3 {
-        font-size: 1.2rem;
+        font-size: 1.1rem; /* Smaller heading */
       }
 
       .carousel-content p {
-        font-size: 0.95rem;
+        font-size: 0.9rem; /* Smaller text */
       }
       
       .section {
@@ -880,7 +889,7 @@
       }
     }
 
-    /* Extra small screens */
+    /* Extra small screens - FURTHER MOBILE IMPROVEMENTS */
     @media (max-width: 480px) {
       .container {
         padding: 0 12px;
@@ -900,9 +909,23 @@
         font-size: 12px;
       }
 
+      /* OPTIMAL MOBILE IMAGE SIZE */
       .carousel-item img {
-        height: 250px;
-        padding: 10px;
+        height: 200px; /* Even more proportional */
+        padding: 6px; /* Minimal padding */
+      }
+
+      .carousel-content {
+        padding: 14px; /* Compact padding */
+      }
+
+      .carousel-content h3 {
+        font-size: 1.05rem; /* Compact heading */
+      }
+
+      .carousel-content p {
+        font-size: 0.85rem; /* Compact text */
+        line-height: 1.4;
       }
 
       .contact-form {
@@ -912,6 +935,11 @@
       .btn {
         padding: 10px 16px;
         font-size: 14px;
+      }
+
+      .badge {
+        font-size: 11px;
+        padding: 4px 8px;
       }
     }
   </style>
