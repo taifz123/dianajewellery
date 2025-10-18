@@ -1,964 +1,1331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Diana's Sparkle Jewellery — Handcrafted Luxury</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diana 1 Jewellery - Exquisite Gold Jewelry Collection</title>
+    <meta name="description" content="Diana 1 Jewellery offers premium gold jewelry including rings, necklaces, earrings, bangles and bracelets. Visit our store for exquisite craftsmanship.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="logo.png" as="image">
+    <link rel="preload" href="front.png" as="image">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --rich-gold: #FFD700;
+            --dark-gold: #B8860B;
+            --rose-gold: #E8B4A0;
+            --champagne: #F7E7CE;
+            --deep-black: #0A0A0A;
+            --charcoal: #1A1A1A;
+            --pearl-white: #FEFEFE;
+            --shadow-gold: rgba(212, 175, 55, 0.3);
+            --glow-gold: rgba(255, 215, 0, 0.6);
+        }
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root {
-      --bg: #fffdfb; --muted: #6b7280; --accent: #d4af37; --accent-2: #b88722; --deep: #0f1724;
-      --card: #ffffff; --glass: rgba(255,255,255,0.8); --radius: 16px; --max-width: 1400px;
-      --transition: 300ms cubic-bezier(.2,.9,.3,1); --shadow-1: 0 8px 25px rgba(16,24,40,0.08);
-      --shadow-2: 0 20px 60px rgba(16,24,40,0.12); --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4e5ab 100%);
-      --gradient-bg: linear-gradient(135deg, #fffdfb 0%, #f8f6f0 100%);
-    }
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, var(--deep-black) 0%, var(--charcoal) 50%, #2A2A2A 100%);
+            color: var(--pearl-white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-    body {
-      margin: 0; font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
-      color: var(--deep); background: var(--gradient-bg); -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale; line-height: 1.6; overflow-x: hidden;
-    }
+        /* Premium Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--deep-black), var(--charcoal));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
 
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-    .animate-fade-up { animation: fadeInUp 0.6s ease-out; }
-    .animate-slide-in { animation: slideIn 0.5s ease-out; }
-    .animate-float { animation: float 3s ease-in-out infinite; }
+        .loader-content {
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
 
-    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+        .loader-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+            animation: luxuryPulse 2s ease-in-out infinite;
+        }
 
-    /* Header */
-    header {
-      position: fixed; top: 0; width: 100%; z-index: 100; background: var(--glass);
-      backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212,175,55,0.1); transition: all var(--transition);
-    }
-    .nav-wrap { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; gap: 16px; }
-    .brand {
-      display: flex; align-items: center; gap: 12px; font-family: "Playfair Display", serif;
-      font-size: 20px; font-weight: 700; color: var(--deep); text-decoration: none; min-width: 0;
-    }
-    .brand img { height: 44px; width: 44px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
-    .brand-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .loader-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 30px var(--glow-gold));
+        }
 
-    nav.desktop { display: flex; align-items: center; gap: 24px; }
-    nav.desktop a {
-      color: var(--muted); font-weight: 500; padding: 10px 16px; border-radius: 25px;
-      transition: all var(--transition); text-decoration: none; white-space: nowrap;
-    }
-    nav.desktop a:hover { color: var(--accent); background: rgba(212,175,55,0.1); transform: translateY(-1px); }
-    nav.desktop a.active { color: white; background: var(--gradient-gold); box-shadow: var(--shadow-1); }
+        .loader-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--primary-gold);
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            animation: shimmerText 3s ease-in-out infinite;
+        }
 
-    .mobile-nav { display: none; }
-    .hamburger {
-      width: 44px; height: 44px; border-radius: 10px; border: 1px solid rgba(212,175,55,0.2);
-      background: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all var(--transition);
-    }
-    .hamburger:hover { background: rgba(212,175,55,0.1); border-color: var(--accent); }
+        .loader-bar {
+            width: 200px;
+            height: 3px;
+            background: rgba(212, 175, 55, 0.2);
+            margin: 0 auto;
+            border-radius: 2px;
+            overflow: hidden;
+        }
 
-    .mobile-menu {
-      position: fixed; top: 80px; left: 0; width: 100%; background: white; box-shadow: var(--shadow-2);
-      transform: translateY(-100%); opacity: 0; transition: all var(--transition); z-index: 99;
-    }
-    .mobile-menu.active { transform: translateY(0); opacity: 1; }
-    .mobile-menu nav { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
-    .mobile-menu nav a {
-      color: var(--deep); font-weight: 500; padding: 12px 16px; border-radius: 12px;
-      transition: all var(--transition); display: flex; align-items: center; gap: 10px; text-decoration: none;
-    }
-    .mobile-menu nav a:hover { background: rgba(212,175,55,0.1); color: var(--accent); }
-    .mobile-menu nav a.active { background: var(--gradient-gold); color: white; }
+        .loader-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-gold), var(--rich-gold), var(--primary-gold));
+            width: 0%;
+            animation: loadProgress 3s ease-out forwards;
+            border-radius: 2px;
+        }
 
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 25px;
-      font-weight: 600; cursor: pointer; transition: all var(--transition); border: none; text-decoration: none;
-      position: relative; overflow: hidden; white-space: nowrap;
-    }
-    .btn-primary { background: var(--gradient-gold); color: white; box-shadow: var(--shadow-1); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
-    .btn-outline { background: transparent; border: 2px solid var(--accent); color: var(--accent); }
-    .btn-outline:hover { background: var(--accent); color: white; transform: translateY(-1px); }
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-    .header-cta { display: flex; gap: 8px; align-items: center; }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 8s ease-in-out infinite;
+            box-shadow: 0 0 10px var(--glow-gold);
+        }
 
-    /* Hero Section */
-    .hero {
-      padding: 100px 0 60px;
-      background: radial-gradient(circle at 20% 80%, rgba(212,175,55,0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(212,175,55,0.08) 0%, transparent 50%), var(--gradient-bg);
-      position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23d4af37" opacity="0.1"/></svg>');
-      opacity: 0.5;
-    }
-    .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; position: relative; z-index: 2; }
-    .hero-text { animation: fadeInUp 0.8s ease-out; }
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    .eyebrow {
-      display: inline-block; background: rgba(212,175,55,0.15); color: var(--accent-2);
-      padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 600;
-      margin-bottom: 20px; border: 1px solid rgba(212,175,55,0.2);
-    }
-    .hero h1 {
-      font-family: "Playfair Display", serif; font-size: clamp(1.8rem, 4vw, 3.5rem);
-      font-weight: 700; line-height: 1.2; margin: 0 0 20px 0; color: var(--deep);
-    }
-    .hero p { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--muted); margin-bottom: 24px; line-height: 1.7; }
-    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
 
-    .hero-image { position: relative; animation: fadeInUp 0.8s ease-out 0.2s both; }
-    .hero-image img { width: 100%; border-radius: 20px; box-shadow: var(--shadow-2); transition: transform var(--transition); }
-    .hero-image:hover img { transform: scale(1.02); }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
 
-    .floating-elements { position: absolute; top: 15px; right: 15px; display: flex; gap: 8px; }
-    .floating-badge {
-      background: white; padding: 8px 12px; border-radius: 12px; box-shadow: var(--shadow-1);
-      font-size: 12px; font-weight: 600; color: var(--accent); animation: float 3s ease-in-out infinite;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
 
-    /* Section Styling */
-    .section { padding: 60px 0; }
-    .section-header { text-align: center; margin-bottom: 40px; }
-    .section-title {
-      font-family: "Playfair Display", serif; font-size: clamp(1.8rem, 4vw, 2.5rem);
-      font-weight: 700; margin: 0 0 12px 0; color: var(--deep);
-    }
-    .section-subtitle {
-      font-size: clamp(1rem, 2vw, 1.1rem); color: var(--muted); margin: 0 0 16px 0;
-      max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;
-    }
-    .collection-note {
-      font-size: 0.95rem; color: var(--accent-2); font-style: italic; margin: 0 0 24px 0;
-      background: rgba(212,175,55,0.08); padding: 12px 20px; border-radius: 12px;
-      border-left: 4px solid var(--accent); max-width: 700px; margin-left: auto; margin-right: auto;
-    }
+        .logo:hover {
+            transform: scale(1.05);
+        }
 
-    /* DESKTOP CAROUSEL - Original horizontal carousel */
-    .collection-container { margin-bottom: 50px; position: relative; }
-    .collection-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px; }
-    .collection-title {
-      font-family: "Playfair Display", serif; font-size: clamp(1.4rem, 3vw, 1.8rem);
-      font-weight: 700; color: var(--deep); margin: 0; display: flex; align-items: center; gap: 10px;
-    }
+        .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            filter: drop-shadow(0 0 15px var(--glow-gold));
+            transition: filter 0.3s ease;
+        }
 
-    .carousel-nav { display: flex; gap: 6px; flex-shrink: 0; }
-    .carousel-btn {
-      width: 40px; height: 40px; border-radius: 50%; background: white; border: 2px solid var(--accent);
-      color: var(--accent); cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all var(--transition); font-size: 14px;
-    }
-    .carousel-btn:hover { background: var(--accent); color: white; transform: scale(1.05); }
-    .carousel-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .logo:hover img {
+            filter: drop-shadow(0 0 25px var(--glow-gold));
+        }
 
-    .carousel-wrapper { position: relative; overflow: hidden; border-radius: 12px; }
-    .carousel-track { display: flex; transition: transform 0.5s ease; gap: 20px; }
-    .collection-item {
-      min-width: calc(50% - 10px); flex-shrink: 0; background: white; border-radius: 12px;
-      overflow: hidden; box-shadow: var(--shadow-1); transition: all var(--transition);
-    }
-    .collection-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-gold);
+            letter-spacing: 2px;
+        }
 
-    .collection-item img {
-      width: 100%; height: 350px; object-fit: contain; background: #f9f9f9;
-      border-radius: 12px 12px 0 0; padding: 15px;
-    }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
 
-    .collection-content { padding: 24px; }
-    .collection-content h3 {
-      font-family: "Playfair Display", serif; font-size: 1.3rem; margin: 0 0 10px 0;
-      color: var(--deep); line-height: 1.3;
-    }
-    .collection-content p { color: var(--muted); margin: 0 0 16px 0; line-height: 1.5; font-size: 1rem; }
+        .nav-link {
+            color: var(--pearl-white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
 
-    .badge {
-      display: inline-block; background: rgba(212,175,55,0.15); color: var(--accent-2);
-      padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600; margin-bottom: 14px;
-    }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--rich-gold));
+            transition: width 0.3s ease;
+        }
 
-    /* About Section */
-    .about { background: white; position: relative; overflow: hidden; }
-    .about::before {
-      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-      background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
-      animation: float 20s ease-in-out infinite;
-    }
-    .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; position: relative; z-index: 2; }
-    .about-text { animation: slideIn 0.6s ease-out; }
-    .about img { width: 100%; border-radius: 20px; box-shadow: var(--shadow-2); }
+        .nav-link:hover {
+            color: var(--primary-gold);
+            transform: translateY(-2px);
+        }
 
-    /* Contact Section */
-    .contact { background: var(--gradient-bg); }
-    .contact-content { max-width: 800px; margin: 0 auto; }
-    .contact-form { background: white; padding: 32px; border-radius: 20px; box-shadow: var(--shadow-1); margin-bottom: 32px; }
-    .form-grid { display: grid; gap: 16px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-grid input, .form-grid textarea {
-      padding: 12px 16px; border: 2px solid rgba(212,175,55,0.2); border-radius: 12px;
-      font-size: 16px; transition: all var(--transition); font-family: inherit;
-    }
-    .form-grid input:focus, .form-grid textarea:focus {
-      outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
-    }
+        .nav-link:hover::after {
+            width: 100%;
+        }
 
-    .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .contact-card {
-      background: white; padding: 24px; border-radius: 16px; box-shadow: var(--shadow-1);
-      transition: transform var(--transition); text-align: center;
-    }
-    .contact-card:hover { transform: translateY(-3px); }
-    .contact-icon {
-      width: 50px; height: 50px; background: var(--gradient-gold); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: white; font-size: 20px;
-    }
-    .contact-card h3 { margin: 0 0 8px 0; font-size: 1.1rem; color: var(--deep); }
-    .contact-card p { margin: 0; color: var(--muted); font-size: 0.9rem; }
-    .contact-card strong { color: var(--accent-2); font-weight: 600; }
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
 
-    footer { background: var(--deep); color: white; padding: 32px 0; text-align: center; }
-    footer p { margin: 0; color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-gold);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
 
-    .scroll-indicator { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: rgba(212,175,55,0.2); z-index: 101; }
-    .scroll-progress { height: 100%; background: var(--gradient-gold); width: 0; transition: width 0.1s ease; }
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(26, 26, 26, 0.9)), url('front.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
-    /* MOBILE - VERTICAL STACK LAYOUT (NO CAROUSEL) */
-    @media (max-width: 768px) {
-      .container { padding: 0 16px; }
-      .nav-wrap { padding: 10px 0; }
-      .brand { font-size: 18px; gap: 10px; }
-      .brand img { height: 40px; width: 40px; }
-      nav.desktop { display: none; }
-      .mobile-nav { display: block; }
-      .header-cta { gap: 6px; }
-      .header-cta .btn { padding: 10px 14px; font-size: 14px; }
-      
-      .hero { padding: 80px 0 40px; }
-      .hero-content { grid-template-columns: 1fr; gap: 30px; text-align: center; }
-      .hero-text { order: 2; }
-      .hero-image { order: 1; }
-      .hero-cta { justify-content: center; gap: 10px; }
-      .hero-cta .btn { flex: 1; justify-content: center; min-width: 140px; }
-      .floating-elements { top: 10px; right: 10px; gap: 6px; }
-      .floating-badge { padding: 6px 10px; font-size: 11px; }
-      
-      .about-content { grid-template-columns: 1fr; gap: 30px; text-align: center; }
-      .about-text { order: 2; }
-      
-      /* MOBILE: VERTICAL STACK - NO CAROUSEL */
-      .carousel-nav { display: none; } /* Hide navigation on mobile */
-      
-      .collection-header { 
-        flex-direction: column; 
-        align-items: center; 
-        gap: 12px; 
-        text-align: center;
-      }
-      
-      .carousel-wrapper { 
-        overflow: visible; /* Allow all items to show */
-        border-radius: 12px; 
-      }
-      
-      .carousel-track { 
-        display: block; /* Stack vertically */
-        gap: 0; 
-        transform: none !important; /* Remove any transforms */
-      }
-      
-      .collection-item {
-        min-width: 100%; /* Full width */
-        margin-bottom: 24px; /* Space between items */
-        display: block;
-      }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), transparent, rgba(255, 215, 0, 0.1));
+            animation: shimmerOverlay 4s ease-in-out infinite;
+        }
 
-      .collection-item img {
-        height: 280px; /* Good mobile height */
-        padding: 12px;
-        width: 100%;
-      }
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 30px;
+            animation: fadeInUp 1.5s ease-out;
+        }
 
-      .collection-title { font-size: 1.4rem; gap: 8px; justify-content: center; }
-      .collection-content { padding: 20px; }
-      .collection-content h3 { font-size: 1.2rem; text-align: center; }
-      .collection-content p { font-size: 0.95rem; text-align: center; }
-      .badge { display: block; text-align: center; width: fit-content; margin: 0 auto 12px; }
-      .collection-content .btn { display: block; width: fit-content; margin: 0 auto; }
-      
-      .section { padding: 40px 0; }
-      .section-header { margin-bottom: 30px; }
-      .collection-container { margin-bottom: 40px; }
-      .contact-form { padding: 24px; }
-      .form-row { grid-template-columns: 1fr; gap: 12px; }
-      .contact-info { grid-template-columns: 1fr; gap: 16px; }
-      .contact-card { padding: 20px; }
-      .mobile-menu { top: 70px; }
-    }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px var(--glow-gold);
+            animation: luxuryGlow 3s ease-in-out infinite;
+            letter-spacing: 3px;
+        }
 
-    @media (max-width: 480px) {
-      .container { padding: 0 12px; }
-      .hero { padding: 70px 0 30px; }
-      .section { padding: 30px 0; }
-      .collection-item img { height: 250px; padding: 10px; }
-      .collection-content { padding: 16px; }
-      .contact-form { padding: 20px; }
-      .btn { padding: 10px 16px; font-size: 14px; }
-      .badge { font-size: 11px; padding: 4px 8px; }
-    }
-  </style>
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--champagne);
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--rich-gold));
+            color: var(--deep-black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Collections Section */
+        .collections {
+            padding: 120px 0;
+            background: linear-gradient(180deg, var(--deep-black), var(--charcoal));
+            position: relative;
+        }
+
+        .collections::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--champagne);
+            margin-bottom: 80px;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .collection-card {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .collection-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .collection-card:hover::before {
+            opacity: 1;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+            border-color: var(--primary-gold);
+        }
+
+        .collection-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .collection-card:hover .collection-image {
+            transform: scale(1.1);
+        }
+
+        .collection-info {
+            padding: 30px;
+        }
+
+        .collection-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .collection-description {
+            color: var(--champagne);
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 120px 0;
+            background: linear-gradient(180deg, var(--charcoal), var(--deep-black));
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-gold);
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.8), rgba(255, 215, 0, 0.6));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-text {
+            color: var(--deep-black);
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        /* Store Section */
+        .store-section {
+            padding: 120px 0;
+            background: linear-gradient(180deg, var(--deep-black), var(--charcoal));
+        }
+
+        .store-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .store-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary-gold);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .store-info p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--champagne);
+            margin-bottom: 20px;
+        }
+
+        .store-image-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .store-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .store-image-container:hover .store-image {
+            transform: scale(1.05);
+        }
+
+        /* Google Maps Section */
+        .map-section {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .map-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .map-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .map-container:hover {
+            border-color: var(--primary-gold);
+            box-shadow: 0 25px 70px rgba(212, 175, 55, 0.2);
+        }
+
+        .google-map {
+            width: 100%;
+            height: 400px;
+            border: none;
+            filter: grayscale(20%) contrast(1.1);
+            transition: filter 0.3s ease;
+        }
+
+        .map-container:hover .google-map {
+            filter: grayscale(0%) contrast(1.2);
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 10, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .map-overlay p {
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .map-container:hover .map-overlay {
+            opacity: 1;
+        }
+
+        .map-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .map-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--rich-gold));
+            color: var(--deep-black);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .map-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--charcoal), var(--deep-black));
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .contact-item {
+            background: rgba(26, 26, 26, 0.8);
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+
+        .contact-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .contact-text {
+            color: var(--champagne);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .map-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--rich-gold));
+            color: var(--deep-black);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .map-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--deep-black);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--champagne);
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            color: var(--champagne);
+            opacity: 0.8;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Animations */
+        @keyframes luxuryPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shimmerText {
+            0%, 100% { text-shadow: 0 0 30px var(--glow-gold); }
+            50% { text-shadow: 0 0 50px var(--glow-gold), 0 0 70px var(--glow-gold); }
+        }
+
+        @keyframes loadProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            25% {
+                transform: translateY(-20px) rotate(90deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-40px) rotate(180deg);
+                opacity: 0.7;
+            }
+            75% {
+                transform: translateY(-20px) rotate(270deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes shimmerOverlay {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes luxuryGlow {
+            0%, 100% {
+                text-shadow: 0 0 30px var(--glow-gold);
+            }
+            50% {
+                text-shadow: 0 0 50px var(--glow-gold), 0 0 70px var(--glow-gold);
+            }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3); }
+            50% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6); }
+            100% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .collections-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .store-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Greek Key Pattern */
+        .greek-pattern {
+            position: relative;
+        }
+
+        .greek-pattern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--primary-gold) 0px,
+                var(--primary-gold) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+    </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
 </head>
-
 <body>
-  <!-- Scroll Progress Indicator -->
-  <div class="scroll-indicator">
-    <div class="scroll-progress" id="scrollProgress"></div>
-  </div>
-
-  <!-- Header -->
-  <header>
-    <div class="container">
-      <div class="nav-wrap">
-        <a href="#home" class="brand">
-          <img src="logo.png" alt="Diana's Sparkle logo" onerror="this.src='placeholder-logo.png'">
-          <span class="brand-text">Diana's Sparkle</span>
-        </a>
-        
-        <!-- Desktop Navigation -->
-        <nav class="desktop">
-          <a href="#home" class="active">Home</a>
-          <a href="#collection">Collection</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </nav>
-
-        <!-- Mobile Navigation -->
-        <div class="mobile-nav">
-          <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu">
-            <i class="fas fa-bars" id="hamburgerIcon"></i>
-          </button>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <img src="logo.png" alt="Diana 1 Jewellery">
+            </div>
+            <div class="loader-text">DIANA 1 JEWELLERY</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
         </div>
-        
-        <div class="header-cta">
-          <a class="btn btn-outline" href="tel:+0281027994">
-            <i class="fas fa-phone"></i>
-            <span class="cta-text">Call</span>
-          </a>
-        </div>
-      </div>
     </div>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-      <nav>
-        <a href="#home" onclick="closeMobileMenu()">
-          <i class="fas fa-home"></i>
-          Home
-        </a>
-        <a href="#collection" onclick="closeMobileMenu()">
-          <i class="fas fa-gem"></i>
-          Collection
-        </a>
-        <a href="#about" onclick="closeMobileMenu()">
-          <i class="fas fa-heart"></i>
-          About
-        </a>
-        <a href="#contact" onclick="closeMobileMenu()">
-          <i class="fas fa-envelope"></i>
-          Contact
-        </a>
-      </nav>
-    </div>
-  </header>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-text">
-          <span class="eyebrow">
-            <i class="fas fa-star"></i>
-            Artisan Made
-          </span>
-          <h1>Jewellery that speaks softly — and lasts a lifetime</h1>
-          <p>Each piece at Diana's Sparkle is hand-designed and handcrafted with careful attention to detail. We prioritize timeless shapes, quality materials and a gentle, feminine aesthetic.</p>
-          
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#collection">
-              <i class="fas fa-gem"></i>
-              Explore Collection
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Diana 1 Jewellery">
+                <span class="logo-text">DIANA 1</span>
             </a>
-            <a class="btn btn-outline" href="#contact">
-              <i class="fas fa-palette"></i>
-              Custom Order
-            </a>
-          </div>
-
-          <div style="margin-top: 16px; color: var(--muted); font-size: 14px;">
-            Prefer a direct chat? <strong style="color: var(--accent-2);">Call or message us</strong> and we'll guide you through bespoke options.
-          </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#collections" class="nav-link">Collections</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#store" class="nav-link">Our Store</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        
-        <div class="hero-image">
-          <img src="front.png" alt="Featured jewellery piece" onerror="this.src='placeholder-hero.png'" class="animate-float">
-          <div class="floating-elements">
-            <div class="floating-badge">
-              <i class="fas fa-award"></i>
-              Handcrafted
-            </div>
-          </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">DIANA 1 JEWELLERY</h1>
+            <p class="hero-subtitle">Exquisite Gold Jewelry Crafted to Perfection</p>
+            <a href="#collections" class="hero-cta">Explore Collections</a>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Collection Section -->
-  <section id="collection" class="section">
-    <div class="container">
-      <div class="section-header animate-fade-up">
-        <h2 class="section-title">Our Exquisite Collection</h2>
-        <p class="section-subtitle">An elegant selection of gold necklaces, bracelets, bangles and earrings — all handcrafted. We price by enquiry so we can tailor metal, stones and fit to you.</p>
-        <div class="collection-note">
-          <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
-          The pieces shown below are examples of what we have in store and the quality of craftsmanship you can expect.
+    <!-- Collections Section -->
+    <section class="collections greek-pattern" id="collections">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Premium Collections</h2>
+            <p class="section-subtitle fade-in">Discover our carefully curated selection of fine gold jewelry</p>
+            
+            <div class="collections-grid">
+                <div class="collection-card fade-in">
+                    <img src="v1.png" alt="Gold Earrings" class="collection-image">
+                    <div class="collection-info">
+                        <h3 class="collection-name">Elegant Earrings</h3>
+                        <p class="collection-description">Sophisticated gold hoop earrings that add a touch of luxury to any outfit. Crafted with precision and attention to detail.</p>
+                    </div>
+                </div>
+
+                <div class="collection-card fade-in">
+                    <img src="v2.png" alt="Gold Bangles" class="collection-image">
+                    <div class="collection-info">
+                        <h3 class="collection-name">Luxury Bangles</h3>
+                        <p class="collection-description">Exquisite gold bangles featuring intricate patterns and premium craftsmanship. Perfect for special occasions and daily elegance.</p>
+                    </div>
+                </div>
+
+                <div class="collection-card fade-in">
+                    <img src="v3.png" alt="Diamond Rings" class="collection-image">
+                    <div class="collection-info">
+                        <h3 class="collection-name">Diamond Rings</h3>
+                        <p class="collection-description">Stunning engagement and wedding rings featuring brilliant diamonds set in premium gold. Symbols of eternal love and commitment.</p>
+                    </div>
+                </div>
+
+                <div class="collection-card fade-in">
+                    <img src="v4.png" alt="Gold Necklaces" class="collection-image">
+                    <div class="collection-info">
+                        <h3 class="collection-name">Designer Necklaces</h3>
+                        <p class="collection-description">Beautiful gold necklaces with unique pendant designs. Each piece tells a story of elegance and sophisticated style.</p>
+                    </div>
+                </div>
+
+                <div class="collection-card fade-in">
+                    <img src="v5.png" alt="Gold Chains" class="collection-image">
+                    <div class="collection-info">
+                        <h3 class="collection-name">Premium Chains</h3>
+                        <p class="collection-description">Luxurious gold chains with intricate link patterns. Versatile pieces that complement any jewelry collection.</p>
+                    </div>
+                </div>
+
+                <div class="collection-card fade-in">
+                    <img src="v6.png" alt="Gold Bracelets" class="collection-image">
+                    <div class="collection-info">
+                        <h3 class="collection-name">Ornate Bracelets</h3>
+                        <p class="collection-description">Elaborate gold bracelets featuring traditional motifs and contemporary designs. Masterpieces of jewelry artistry.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Earrings & Rings Collection -->
-      <div class="collection-container">
-        <div class="collection-header">
-          <h3 class="collection-title">
-            <i class="fas fa-gem" style="color: var(--accent);"></i>
-            Earrings & Rings
-          </h3>
-          <div class="carousel-nav">
-            <button class="carousel-btn" onclick="prevSlide('earrings')" id="earrings-prev">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="carousel-btn" onclick="nextSlide('earrings')" id="earrings-next">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title fade-in">Jewelry Gallery</h2>
+            <p class="section-subtitle fade-in">Browse our complete collection of fine jewelry pieces</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in">
+                    <img src="v7.png" alt="Jewelry Collection" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-text">View Details</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="v8.png" alt="Jewelry Collection" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-text">View Details</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="v9.png" alt="Jewelry Collection" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-text">View Details</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="image2.png" alt="Jewelry Collection" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-text">View Details</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="image3.png" alt="Jewelry Collection" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-text">View Details</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="image4.png" alt="Jewelry Collection" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-text">View Details</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="image5.png" alt="Jewelry Collection" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-text">View Details</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="image6.png" alt="Jewelry Collection" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <span class="gallery-text">View Details</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="carousel-wrapper">
-          <div class="carousel-track" id="earrings-track">
-            <div class="collection-item">
-              <img src="v1.png" alt="Earring Hoop Design" onerror="this.src='placeholder-1.png'">
-              <div class="collection-content">
-                <span class="badge">
-                  <i class="fas fa-circle-notch"></i>
-                  Hoop Style
-                </span>
-                <h3>Earring Hoops</h3>
-                <p>Classic hoop earrings in various sizes, perfect for everyday wear or special occasions. Available in different gold finishes.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
+    </section>
+
+    <!-- Store Section -->
+    <section class="store-section greek-pattern" id="store">
+        <div class="container">
+            <div class="store-content">
+                <div class="store-info fade-in">
+                    <h2>Visit Our Artisan Workshop</h2>
+                    <p>Experience the craftsmanship of Diana 1 Jewellery in our specialized workshop located in Fairfield, NSW. Our skilled artisan team creates each piece with meticulous attention to detail.</p>
+                    <p>Located at 56 Spencer Street, our workshop features an extensive collection of gold jewelry, diamonds, and precious stones. Each piece is handcrafted with traditional techniques and modern precision.</p>
+                    <p>We specialize in custom jewelry design, personalized consultation services, and bespoke creations. Visit by appointment to discuss your unique vision and bring your dream jewelry to life.</p>
+                </div>
+                <div class="store-image-container fade-in">
+                    <img src="store.png" alt="Diana 1 Jewellery Store Interior" class="store-image">
+                </div>
             </div>
-            <div class="collection-item">
-              <img src="v2.png" alt="21K Twisted Bracelet" onerror="this.src='placeholder-2.png'">
-              <div class="collection-content">
-                <span class="badge">
-                  <i class="fas fa-crown"></i>
-                  21K Gold
-                </span>
-                <h3>Twisted Bracelet</h3>
-                <p>Elegant 21k gold twisted bracelet showcasing intricate craftsmanship and premium quality materials.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
+            
+            <!-- Google Maps Section -->
+            <div class="map-section fade-in">
+                <h3 class="map-title">Find Us on the Map</h3>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.4!2d150.9526875!3d-33.8707716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12bdb482ccd3b3:0xc3ebb55a60251578!2sDIANA%201%20JEWELLERY!5e0!3m2!1sen!2sau!4v1234567890123!5m2!1sen!2sau"
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="google-map">
+                    </iframe>
+                    <div class="map-overlay">
+                        <p>Click to interact with the map</p>
+                    </div>
+                </div>
+                <div class="map-actions">
+                    <a href="https://www.google.com/maps/place/DIANA+1+JEWELLERY/@-33.8707716,150.9526875,17z/data=!3m1!4b1!4m6!3m5!1s0x6b12bdb482ccd3b3:0xc3ebb55a60251578!8m2!3d-33.8707761!4d150.9552624!16s%2Fg%2F11lkxl1k9d?entry=ttu&amp;g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-button">
+                        Open in Google Maps
+                    </a>
+                    <a href="https://maps.google.com/maps/dir//DIANA+1+JEWELLERY,+56+Spencer+St,+Fairfield+NSW+2165" target="_blank" class="map-button">
+                        Get Directions
+                    </a>
+                </div>
             </div>
-            <div class="collection-item">
-              <img src="v3.png" alt="Double Band Engagement Ring" onerror="this.src='placeholder-3.png'">
-              <div class="collection-content">
-                <span class="badge">
-                  <i class="fas fa-heart"></i>
-                  Engagement
-                </span>
-                <h3>Double Band Ring</h3>
-                <p>Stunning double band engagement ring design, perfect for marking life's most precious moments.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Necklaces & Pendants Collection -->
-      <div class="collection-container">
-        <div class="collection-header">
-          <h3 class="collection-title">
-            <i class="fas fa-circle-notch" style="color: var(--accent);"></i>
-            Necklaces & Pendants
-          </h3>
-          <div class="carousel-nav">
-            <button class="carousel-btn" onclick="prevSlide('necklaces')" id="necklaces-prev">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="carousel-btn" onclick="nextSlide('necklaces')" id="necklaces-next">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">Get In Touch</h2>
+            <p class="section-subtitle fade-in">Visit us or contact us for personalized jewelry consultation</p>
+            
+            <div class="contact-info">
+                <div class="contact-item fade-in">
+                    <div class="contact-icon">📍</div>
+                    <h3 class="contact-title">Visit Our Workshop</h3>
+                    <p class="contact-text">56 Spencer St<br>Fairfield NSW 2165<br>By appointment only</p>
+                    <a href="https://www.google.com/maps/place/DIANA+1+JEWELLERY/@-33.8707716,150.9526875,17z/data=!3m1!4b1!4m6!3m5!1s0x6b12bdb482ccd3b3:0xc3ebb55a60251578!8m2!3d-33.8707761!4d150.9552624!16s%2Fg%2F11lkxl1k9d?entry=ttu&amp;g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">View on Google Maps</a>
+                </div>
+                <div class="contact-item fade-in">
+                    <div class="contact-icon">📞</div>
+                    <h3 class="contact-title">Speak with Our Artisan Team</h3>
+                    <p class="contact-text">02 8102 7994<br>Professional consultation<br>Custom orders welcome</p>
+                </div>
+                <div class="contact-item fade-in">
+                    <div class="contact-icon">✉️</div>
+                    <h3 class="contact-title">Get in Touch for Custom Orders</h3>
+                    <p class="contact-text">najigold@yahoo.com<br>Custom jewelry design<br>Personalized consultation</p>
+                </div>
+            </div>
         </div>
-        <div class="carousel-wrapper">
-          <div class="carousel-track" id="necklaces-track">
-            <div class="collection-item">
-              <img src="v4.png" alt="18K Gold Love Knot Pendant Necklace" onerror="this.src='placeholder-4.png'">
-              <div class="collection-content">
-                <span class="badge">
-                  <i class="fas fa-heart"></i>
-                  18K Gold
-                </span>
-                <h3>Love Knot Pendant</h3>
-                <p>Beautiful 18k gold love knot pendant necklace, symbolizing eternal love and connection with elegant craftsmanship.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Diana 1 Jewellery</h3>
+                    <p>Crafting exquisite gold jewelry with passion and precision. Each piece tells a unique story of elegance and luxury.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#collections">Collections</a></p>
+                    <p><a href="#gallery">Gallery</a></p>
+                    <p><a href="#store">Our Store</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <p>Custom Jewelry Design</p>
+                    <p>Jewelry Repair & Maintenance</p>
+                    <p>Consultation Services</p>
+                    <p>Appraisal Services</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Our Latest Creations</h3>
+                    <p><a href="https://www.instagram.com/diana_1_jewellery/?hl=en" target="_blank">@diana_1_jewellery</a></p>
+                </div>
             </div>
-            <div class="collection-item">
-              <img src="v5.png" alt="Twisted Bangle Design" onerror="this.src='placeholder-5.png'">
-              <div class="collection-content">
-                <span class="badge">
-                  <i class="fas fa-circle"></i>
-                  Twisted Design
-                </span>
-                <h3>Twisted Bangle</h3>
-                <p>Sophisticated twisted bangle featuring intricate goldwork and a comfortable fit for daily wear.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Diana 1 Jewellery. All rights reserved. | Crafted with excellence since inception.</p>
             </div>
-            <div class="collection-item">
-              <img src="v6.png" alt="Coin Bracelet Design" onerror="this.src='placeholder-6.png'">
-              <div class="collection-content">
-                <span class="badge">
-                  <i class="fas fa-coins"></i>
-                  Coin Style
-                </span>
-                <h3>Coin Bracelet</h3>
-                <p>Unique coin bracelet design combining traditional elements with contemporary styling for a timeless look.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+    </footer>
 
-      <!-- Men's & Chain Collection -->
-      <div class="collection-container">
-        <div class="collection-header">
-          <h3 class="collection-title">
-            <i class="fas fa-link" style="color: var(--accent);"></i>
-            Men's & Chain Collection
-          </h3>
-          <div class="carousel-nav">
-            <button class="carousel-btn" onclick="prevSlide('bracelets')" id="bracelets-prev">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="carousel-btn" onclick="nextSlide('bracelets')" id="bracelets-next">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
-        <div class="carousel-wrapper">
-          <div class="carousel-track" id="bracelets-track">
-            <div class="collection-item">
-              <img src="v7.png" alt="Nail Bracelet Design" onerror="this.src='placeholder-7.png'">
-              <div class="collection-content">
-                <span class="badge">
-                  <i class="fas fa-shield-alt"></i>
-                  Bold Design
-                </span>
-                <h3>Nail Bracelet</h3>
-                <p>Contemporary nail bracelet design featuring bold styling and premium construction for a distinctive look.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-            <div class="collection-item">
-              <img src="v8.png" alt="Chain for Men" onerror="this.src='placeholder-8.png'">
-              <div class="collection-content">
-                <span class="badge">
-                  <i class="fas fa-male"></i>
-                  Men's Collection
-                </span>
-                <h3>Men's Chain</h3>
-                <p>Sophisticated chain designed specifically for men, combining strength and elegance in premium gold construction.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-            <div class="collection-item">
-              <img src="v9.png" alt="Premium Necklace Design" onerror="this.src='placeholder-9.png'">
-              <div class="collection-content">
-                <span class="badge">
-                  <i class="fas fa-star"></i>
-                  Premium
-                </span>
-                <h3>Premium Necklace</h3>
-                <p>Exquisite necklace showcasing the finest craftsmanship and materials, perfect for special occasions and gifting.</p>
-                <a class="btn btn-outline" href="#contact">
-                  <i class="fas fa-envelope"></i>
-                  Enquire
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/61281027994" class="whatsapp-btn" target="_blank">
+        💬
+    </a>
 
-  <!-- About Section -->
-  <section id="about" class="section about">
-    <div class="container">
-      <div class="about-content">
-        <div class="about-text">
-          <span class="eyebrow">
-            <i class="fas fa-heart"></i>
-            Our Story
-          </span>
-          <h2 class="section-title" style="text-align: left; margin-bottom: 20px;">
-            Crafting Beauty Since Day One
-          </h2>
-          <p style="font-size: 1.1rem; color: var(--muted); margin-bottom: 20px;">
-            Diana's Sparkle began in a small workshop with a love for creating meaningful jewellery. Each piece is thoughtfully designed for comfort and longevity, using only the finest materials and traditional craftsmanship techniques.
-          </p>
-          <p style="color: var(--muted); margin-bottom: 24px;">
-            We believe that jewellery should tell a story - your story. That's why every piece we create is made to order, allowing us to incorporate your personal style, preferred metals, and meaningful details that make each piece uniquely yours.
-          </p>
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <a class="btn btn-primary" href="#collection">
-              <i class="fas fa-eye"></i>
-              View Collection
-            </a>
-            <a class="btn btn-outline" href="#contact">
-              <i class="fas fa-comments"></i>
-              Start Conversation
-            </a>
-          </div>
-        </div>
-        <div class="about-image">
-          <img src="store.png" alt="Diana's Sparkle workshop" onerror="this.src='placeholder-store.png'" class="animate-float">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="section contact">
-    <div class="container">
-      <div class="contact-content">
-        <div class="section-header">
-          <h2 class="section-title">Get in touch</h2>
-          <p class="section-subtitle">
-            Tell us about your idea — custom pieces, repairs, or bespoke designs. We'll respond with guidance and a tailored quote.
-          </p>
-        </div>
-
-        <!-- Contact Form -->
-        <div class="contact-form">
-          <form action="#" method="post" class="form-grid" aria-label="Contact form">
-            <div class="form-row">
-              <input name="name" type="text" placeholder="Your name" required aria-label="Your name">
-              <input name="email" type="email" placeholder="Email address" required aria-label="Email address">
-            </div>
-            <input name="subject" type="text" placeholder="Subject (optional)" aria-label="Subject">
-            <textarea name="message" rows="6" placeholder="Tell us about the piece you'd like..." required aria-label="Message"></textarea>
-            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: space-between;">
-              <button type="submit" class="btn btn-primary">
-                <i class="fas fa-paper-plane"></i>
-                Send Message
-              </button>
-              <div style="color: var(--muted); font-size: 14px;">
-                Or contact: <strong style="color: var(--accent-2);">najigold@yahoo.com</strong>
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <!-- Contact Information Cards -->
-        <div class="contact-info">
-          <div class="contact-card animate-fade-up">
-            <div class="contact-icon">
-              <i class="fas fa-envelope"></i>
-            </div>
-            <h3>Email</h3>
-            <p>Get in touch for custom orders</p>
-            <strong>najigold@yahoo.com</strong>
-          </div>
-
-          <div class="contact-card animate-fade-up" style="animation-delay: 0.1s;">
-            <div class="contact-icon">
-              <i class="fas fa-phone"></i>
-            </div>
-            <h3>Phone</h3>
-            <p>Speak with our artisan team</p>
-            <strong>02 8102 7994</strong>
-          </div>
-
-          <div class="contact-card animate-fade-up" style="animation-delay: 0.2s;">
-            <div class="contact-icon">
-              <i class="fas fa-map-marker-alt"></i>
-            </div>
-            <h3>Address</h3>
-            <p>Visit our workshop by appointment</p>
-            <strong>56 Spencer St, Fairfield NSW 2165</strong>
-          </div>
-
-          <div class="contact-card animate-fade-up" style="animation-delay: 0.3s;">
-            <div class="contact-icon">
-              <i class="fab fa-instagram"></i>
-            </div>
-            <h3>Instagram</h3>
-            <p>Follow our latest creations</p>
-            <strong>@diana_1_jewellery</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Diana's Sparkle Jewellery. All rights reserved. | Handcrafted with love in Australia</p>
-    </div>
-  </footer>
-
-  <!-- SIMPLIFIED JavaScript - Desktop carousel only -->
-  <script>
-    // Mobile menu functionality
-    let mobileMenuOpen = false;
-
-    function toggleMobileMenu() {
-      const mobileMenu = document.getElementById('mobileMenu');
-      const hamburgerIcon = document.getElementById('hamburgerIcon');
-      
-      mobileMenuOpen = !mobileMenuOpen;
-      
-      if (mobileMenuOpen) {
-        mobileMenu.classList.add('active');
-        hamburgerIcon.classList.remove('fa-bars');
-        hamburgerIcon.classList.add('fa-times');
-      } else {
-        mobileMenu.classList.remove('active');
-        hamburgerIcon.classList.remove('fa-times');
-        hamburgerIcon.classList.add('fa-bars');
-      }
-    }
-
-    function closeMobileMenu() {
-      const mobileMenu = document.getElementById('mobileMenu');
-      const hamburgerIcon = document.getElementById('hamburgerIcon');
-      
-      mobileMenuOpen = false;
-      mobileMenu.classList.remove('active');
-      hamburgerIcon.classList.remove('fa-times');
-      hamburgerIcon.classList.add('fa-bars');
-    }
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-      const mobileMenu = document.getElementById('mobileMenu');
-      const hamburger = document.querySelector('.hamburger');
-      
-      if (mobileMenuOpen && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
-        closeMobileMenu();
-      }
-    });
-
-    // Scroll progress indicator
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.pageYOffset;
-      const docHeight = document.body.offsetHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
-      document.getElementById('scrollProgress').style.width = scrollPercent + '%';
-    });
-
-    // Smooth scroll for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Active navigation highlighting
-    window.addEventListener('scroll', () => {
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('nav a');
-      
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (window.pageYOffset >= sectionTop - 100) {
-          current = section.getAttribute('id');
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-          link.classList.add('active');
-        }
-      });
-    });
-
-    // DESKTOP CAROUSEL ONLY - Much simpler code
-    const carousels = {
-      'earrings': { currentIndex: 0, itemsToShow: 2, totalItems: 3 },
-      'necklaces': { currentIndex: 0, itemsToShow: 2, totalItems: 3 },
-      'bracelets': { currentIndex: 0, itemsToShow: 2, totalItems: 3 }
-    };
-
-    function updateCarousel(type) {
-      // Only run on desktop
-      if (window.innerWidth < 768) return;
-      
-      const track = document.getElementById(type + '-track');
-      const items = track.querySelectorAll('.collection-item');
-      const itemWidth = items[0].offsetWidth + 20; // width + gap
-      const translateX = -carousels[type].currentIndex * itemWidth;
-      track.style.transform = `translateX(${translateX}px)`;
-      
-      updateCarouselButtons(type);
-    }
-
-    function updateCarouselButtons(type) {
-      const prevBtn = document.getElementById(type + '-prev');
-      const nextBtn = document.getElementById(type + '-next');
-      const carousel = carousels[type];
-      const maxIndex = carousel.totalItems - carousel.itemsToShow;
-      
-      prevBtn.disabled = carousel.currentIndex === 0;
-      nextBtn.disabled = carousel.currentIndex >= maxIndex;
-    }
-
-    function nextSlide(type) {
-      if (window.innerWidth < 768) return; // Only desktop
-      
-      const carousel = carousels[type];
-      const maxIndex = carousel.totalItems - carousel.itemsToShow;
-      
-      if (carousel.currentIndex < maxIndex) {
-        carousel.currentIndex++;
-        updateCarousel(type);
-      }
-    }
-
-    function prevSlide(type) {
-      if (window.innerWidth < 768) return; // Only desktop
-      
-      const carousel = carousels[type];
-      
-      if (carousel.currentIndex > 0) {
-        carousel.currentIndex--;
-        updateCarousel(type);
-      }
-    }
-
-    // Initialize on desktop only
-    window.addEventListener('load', () => {
-      if (window.innerWidth >= 768) {
-        Object.keys(carousels).forEach(type => {
-          updateCarousel(type);
+    <script>
+        // Smooth loading animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 3000);
         });
-      }
-    });
 
-    // Handle resize
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 768) {
-        Object.keys(carousels).forEach(type => {
-          updateCarousel(type);
-        });
-      }
-    });
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
 
-    // Intersection Observer for animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                particlesContainer.appendChild(particle);
+            }
         }
-      });
-    }, observerOptions);
 
-    document.querySelectorAll('.animate-fade-up, .animate-slide-in').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      observer.observe(el);
-    });
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
 
-    // Header background on scroll
-    window.addEventListener('scroll', () => {
-      const header = document.querySelector('header');
-      if (window.scrollY > 50) {
-        header.style.background = 'rgba(255,255,255,0.95)';
-        header.style.backdropFilter = 'blur(20px)';
-      } else {
-        header.style.background = 'rgba(255,255,255,0.8)';
-        header.style.backdropFilter = 'blur(20px)';
-      }
-    });
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-    // Form submission handling
-    document.querySelector('.form-grid').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const formData = new FormData(this);
-      const name = formData.get('name');
-      const email = formData.get('email');
-      const subject = formData.get('subject');
-      const message = formData.get('message');
-      
-      const mailtoSubject = subject ? subject : 'Enquiry from ' + name;
-      const mailtoBody = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
-      const mailtoLink = `mailto:najigold@yahoo.com?subject=${encodeURIComponent(mailtoSubject)}&body=${mailtoBody}`;
-      
-      window.location.href = mailtoLink;
-      alert('Thank you for your enquiry! Your default email client should now open with your message.');
-    });
-  </script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize particles
+        createParticles();
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Enhanced performance optimizations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preload critical images
+            const criticalImages = ['logo.png', 'front.png', 'store.png'];
+            criticalImages.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+
+            // Optimize scroll performance
+            let ticking = false;
+            function updateScrollEffects() {
+                // Update navbar
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(updateScrollEffects);
+                    ticking = true;
+                }
+            });
+        });
+
+        // Add touch support for mobile devices
+        if ('ontouchstart' in window) {
+            document.body.classList.add('touch-device');
+        }
+
+        // Lazy loading for gallery images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    </script>
 </body>
 </html>
