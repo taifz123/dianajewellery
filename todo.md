@@ -39,5 +39,5 @@
 - [x] Test on multiple devices and browsers
 - [x] Validate HTML/CSS
 - [x] Test all interactive features
-- [ ] Create new branch and push changes
-- [ ] Create pull request for review
+- [x] Create new branch and push changes
+- [x] Create pull request for review
